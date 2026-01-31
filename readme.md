@@ -251,7 +251,7 @@ Used to assign values to variables.
 
 
 
-### 📌 6. Membership Operators
+### 📌 5. Membership Operators
 Used to check if a value exists in a sequence.
 
 | Operator | Meaning              | Example            |
@@ -264,7 +264,7 @@ print("apple" in fruits)  # True
 ```
 ---
 
-### 7. Identity Operators
+### 6. Identity Operators
 Used to compare memory locations of two objects.
 
 | Operator | Meaning           | Example    |
@@ -277,3 +277,124 @@ x = [1, 2]
 y = x
 print(x is y)  # True
 ```
+
+
+---
+
+## 📌 What is a Condition?
+
+A **condition** is a statement that checks whether something is **True or False**.
+
+Conditions help a program make decisions.
+
+In simple words:  
+👉 A condition allows the program to choose what to do next.
+
+---
+
+## 🌍 Real-Life Example of a Condition
+
+- If it is raining → Take an umbrella  
+- If marks ≥ 40 → Pass  
+- If age ≥ 18 → Can vote  
+
+Just like in real life, computers also make decisions using conditions.
+
+---
+
+## 🎯 Why Are Conditions Used?
+
+Conditions are used to:
+- Make decisions in a program  
+- Control the flow of the program  
+- Run different code based on different situations  
+
+Without conditions, a program would run the same way every time and could not make choices.
+
+---
+
+## 📌 Types of Conditions in Python
+
+Python mainly uses:
+
+1. `if` statement  
+2. `if-else` statement  
+3. `if-elif-else` statement  
+
+---
+
+## 🔹 1. `if` Statement
+
+Used when we want code to run **only if a condition is true**.
+
+### Syntax:
+```python
+if condition:
+    statement
+
+age = 20
+
+if age >= 18:
+    print("You are eligible to vote")
+```
+### 2. if-else Statement
+- Used when there are two choices.
+```Syntax:
+if condition:
+    statement1
+else:
+    statement2
+```
+### Example 
+```num = 7
+
+if num % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
+```
+
+### 3. if-elif-else Statement
+- Used when there are multiple conditions.
+# Syntax
+```if condition1:
+    statement1
+elif condition2:
+    statement2
+else:
+    statement3
+```
+# Example
+```marks = 85
+if marks >= 90:
+    print("Grade A")
+elif marks >= 75:
+    print("Grade B")
+elif marks >= 50:
+    print("Grade C")
+else:
+    print("Fail")
+
+```
+
+### Conditions Use Comparison Operators
+| Operator | Meaning               |
+| -------- | --------------------- |
+| ==       | Equal to              |
+| !=       | Not equal             |
+| >        | Greater than          |
+| <        | Less than             |
+| >=       | Greater than or equal |
+| <=       | Less than or equal    |
+
+
+
+### Conditions Can Use Logical Operators
+
+| Operator | Meaning                             |
+| -------- | ----------------------------------- |
+| and      | Both conditions must be true        |
+| or       | At least one condition must be true |
+| not      | Reverses the condition              |
+
+---
