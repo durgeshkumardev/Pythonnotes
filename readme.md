@@ -115,15 +115,164 @@ Libraries are collections of pre-written code that help us do tasks easily.
 
 ---
 
-## 🎯 Summary
+# 🐍 Python Basics: Variables, Data Types, and Input/Output
 
-Python is:
-- Easy to learn  
-- Used in many industries  
-- Supported by powerful tools and libraries  
-
-It is one of the **best programming languages for beginners** and also powerful enough for advanced technologies like AI and Data Science.
+This guide explains the fundamental building blocks of Python programming.
 
 ---
 
-📘 *Next Step:* Learn Python basics like variables, data types, conditions, and loops.
+## 📌 1. Variables in Python
+
+A **variable** is used to store data in a program.  
+Think of a variable as a **container** that holds a value.
+
+### Rules for Naming Variables
+✔ Can contain letters, numbers, and underscores  
+✔ Must start with a letter or underscore  
+❌ Cannot start with a number  
+❌ Cannot use Python keywords (like if, else, for)
+
+### Example:
+```python
+name = "Rahul"
+age = 20
+marks = 85.5
+```
+
+- name stores text
+
+- age stores a whole number
+
+- marks stores a decimal number
+
+- Python automatically understands the type of variable based on the value.
+
+| Data Type | Description     | Example     |
+| --------- | --------------- | ----------- |
+| `int`     | Whole numbers   | 10, 25      |
+| `float`   | Decimal numbers | 10.5, 99.9  |
+| `str`     | Text (String)   | "Hello"     |
+| `bool`    | True/False      | True, False |
+
+
+---
+
+```x = 10          # int
+y = 5.5         # float
+name = "Python" # str
+is_active = True # bool
+```
+
+
+
+
+### Operators are symbols used to perform operations on variables and values.
+
+Example:
+```python
+a = 10
+b = 5
+print(a + b)  # Output: 15
+
+
+
+### 1. Arithmetic Operators
+Used to perform mathematical operations.
+
+| Operator | Meaning             | Example | Output |
+|----------|---------------------|---------|--------|
+| +        | Addition            | 5 + 3   | 8      |
+| -        | Subtraction         | 5 - 3   | 2      |
+| *        | Multiplication      | 5 * 3   | 15     |
+| /        | Division            | 10 / 2  | 5.0    |
+| %        | Modulus (Remainder) | 10 % 3  | 1      |
+| **       | Exponent (Power)    | 2 ** 3  | 8      |
+| //       | Floor Division      | 10 // 3 | 3      |
+
+Example:
+
+```python
+a = 10
+b = 3
+print(a + b)   # 13
+print(a // b)  # 3
+
+
+### 📌 2. Comparison Operators
+Used to compare two values. The result is always **True or False**.
+
+| Operator | Meaning               | Example |
+|----------|-----------------------|---------|
+| ==       | Equal to              | a == b  |
+| !=       | Not equal             | a != b  |
+| >        | Greater than          | a > b   |
+| <        | Less than             | a < b   |
+| >=       | Greater than or equal | a >= b  |
+| <=       | Less than or equal    | a <= b  |
+
+Example:
+
+```python
+x = 10
+y = 5
+print(x > y)  # True
+
+---
+
+### 3. Logical Operators
+Used to combine multiple conditions.
+
+| Operator | Meaning                                | Example          |
+|----------|----------------------------------------|------------------|
+| and      | True if both conditions are true       | x > 5 and x < 20 |
+| or       | True if at least one condition is true | x < 5 or x > 8   |
+| not      | Reverses the condition                 | not(x > 5)       |
+
+Example:
+
+```python
+age = 25
+print(age > 18 and age < 60)  # True
+
+
+---
+
+### 4. Assignment Operators
+Used to assign values to variables.
+| Operator | Example | Same As      |
+| -------- | ------- | ------------ |
+| =        | x = 5   | Assign value |
+| +=       | x += 3  | x = x + 3    |
+| -=       | x -= 3  | x = x - 3    |
+| *=       | x *= 3  | x = x * 3    |
+| /=       | x /= 3  | x = x / 3    |
+| %=       | x %= 3  | x = x % 3    |
+| **=      | x **= 3 | x = x ** 3   |
+| //=      | x //= 3 | x = x // 3   |
+
+
+
+### 📌 6. Membership Operators
+Used to check if a value exists in a sequence.
+
+| Operator | Meaning              | Example            |
+| -------- | -------------------- | ------------------ |
+| in       | Value exists         | "a" in "apple"     |
+| not in   | Value does not exist | "z" not in "apple" |
+
+```fruits = ["apple", "banana"]
+print("apple" in fruits)  # True
+
+---
+
+### 7. Identity Operators
+Used to compare memory locations of two objects.
+
+| Operator | Meaning           | Example    |
+| -------- | ----------------- | ---------- |
+| is       | Same object       | a is b     |
+| is not   | Different objects | a is not b |
+
+```x = [1, 2]
+y = x
+print(x is y)  # True
