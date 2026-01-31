@@ -398,3 +398,165 @@ else:
 | not      | Reverses the condition              |
 
 ---
+
+# 🔁 Loops in Python 
+
+---
+
+## 📌 What is a Loop?
+
+A **loop** is used to repeat a block of code multiple times.
+
+Instead of writing the same code again and again, we use a loop to do the repetition automatically.
+
+---
+
+## 🌍 Real-Life Example of a Loop
+
+- Taking attendance of 50 students one by one  
+- Printing numbers from 1 to 100  
+- Asking for password until correct  
+
+These repeated actions are similar to loops in programming.
+
+---
+
+## 🎯 Why Are Loops Used?
+
+Loops help to:
+- Save time and code  
+- Avoid repeating the same instructions  
+- Perform tasks multiple times automatically  
+
+---
+
+## 📌 Types of Loops in Python
+
+Python mainly has two loops:
+
+1. `for` loop  
+2. `while` loop  
+
+---
+
+# 🔹 1. `for` Loop
+
+Used when we know **how many times** we want to repeat something.
+
+### Syntax:
+```python
+for variable in sequence:
+    statement
+```
+
+### Example
+```for i in range(1, 6):
+    print(i)
+```
+
+### range() Function
+ range() generates a sequence of numbers.
+
+| Code          | Output    |
+| ------------- | --------- |
+| range(5)      | 0,1,2,3,4 |
+| range(1,6)    | 1,2,3,4,5 |
+| range(1,10,2) | 1,3,5,7,9 |
+
+### Example : Even Numbers from 1 to 10
+```for i in range(1, 11):
+    if i % 2 == 0:
+        print(i)
+```
+--- 
+
+### 2. `while` Loop
+Used when we don’t know how many times the loop should run.
+It runs until a condition becomes False.
+
+# Syntax:
+```while condition:
+    statement
+```
+
+### Example: Print Numbers 1 to 5
+```
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+```
+---
+### Infinite Loop
+- If we forget to update the variable inside a while loop, the loop will run forever.
+# Example of infinite loop:
+```
+i = 1
+while i <= 5:
+    print(i)   # i never changes
+```
+---
+
+### 🔹 Loop Control Statements
+These help control the loop flow.
+
+### 1🔸 break
+Stops the loop immediately.
+
+```for i in range(1, 6):
+    if i == 3:
+        break
+    print(i)
+```
+### Output:
+```1
+2
+4
+5
+```
+--- 
+
+### continue
+Skips the current iteration and moves to the next.
+```for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i)
+```
+# Output:
+```1
+2
+4
+5
+```
+--- 
+### Nested Loops
+```for i in range(1, 4):
+    for j in range(1, 3):
+        print(i, j)
+```
+# Output:
+```
+1 1
+1 2
+2 1
+2 2
+3 1
+3 2
+```
+---
+
+### Loop with Condition
+We can use conditions inside loops
+```for i in range(1, 11):
+    if i > 5:
+        print(i)
+```
+## ⭐ Important Points to Remember
+
+- `for` loop is used when the number of repetitions is known  
+- `while` loop runs based on a condition  
+- Always update variables in `while` loops  
+- `break` stops the loop immediately  
+- `continue` skips the current loop cycle  
+- Loops reduce repeated code and save time  
