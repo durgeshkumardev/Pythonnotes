@@ -328,7 +328,7 @@ Python mainly uses:
 Used when we want code to run **only if a condition is true**.
 
 ### Syntax:
-```python
+```
 if condition:
     statement
 
@@ -339,14 +339,17 @@ if age >= 18:
 ```
 ### 2. if-else Statement
 - Used when there are two choices.
-```Syntax:
+### Syntax:
+```
+
 if condition:
     statement1
 else:
     statement2
 ```
 ### Example 
-```num = 7
+```
+num = 7
 
 if num % 2 == 0:
     print("Even number")
@@ -357,7 +360,8 @@ else:
 ### 3. if-elif-else Statement
 - Used when there are multiple conditions.
 # Syntax
-```if condition1:
+```
+if condition1:
     statement1
 elif condition2:
     statement2
@@ -365,7 +369,8 @@ else:
     statement3
 ```
 # Example
-```marks = 85
+```
+marks = 85
 if marks >= 90:
     print("Grade A")
 elif marks >= 75:
@@ -444,13 +449,14 @@ Python mainly has two loops:
 Used when we know **how many times** we want to repeat something.
 
 ### Syntax:
-```python
+```
 for variable in sequence:
     statement
 ```
 
 ### Example
-```for i in range(1, 6):
+```
+for i in range(1, 6):
     print(i)
 ```
 
@@ -464,7 +470,8 @@ for variable in sequence:
 | range(1,10,2) | 1,3,5,7,9 |
 
 ### Example : Even Numbers from 1 to 10
-```for i in range(1, 11):
+```
+for i in range(1, 11):
     if i % 2 == 0:
         print(i)
 ```
@@ -504,13 +511,15 @@ These help control the loop flow.
 ### 1🔸 break
 Stops the loop immediately.
 
-```for i in range(1, 6):
+```
+for i in range(1, 6):
     if i == 3:
         break
     print(i)
 ```
 ### Output:
-```1
+```
+1
 2
 4
 5
@@ -519,20 +528,23 @@ Stops the loop immediately.
 
 ### continue
 Skips the current iteration and moves to the next.
-```for i in range(1, 6):
+```
+for i in range(1, 6):
     if i == 3:
         continue
     print(i)
 ```
 # Output:
-```1
+```
+1
 2
 4
 5
 ```
 --- 
 ### Nested Loops
-```for i in range(1, 4):
+```
+for i in range(1, 4):
     for j in range(1, 3):
         print(i, j)
 ```
@@ -549,7 +561,8 @@ Skips the current iteration and moves to the next.
 
 ### Loop with Condition
 We can use conditions inside loops
-```for i in range(1, 11):
+```
+for i in range(1, 11):
     if i > 5:
         print(i)
 ```
