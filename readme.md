@@ -475,7 +475,8 @@ Used when we don’t know how many times the loop should run.
 It runs until a condition becomes False.
 
 # Syntax:
-```while condition:
+```
+while condition:
     statement
 ```
 
