@@ -173,11 +173,10 @@ Example:
 a = 10
 b = 5
 print(a + b)  # Output: 15
-
-
+```
 
 ### 1. Arithmetic Operators
-Used to perform mathematical operations.
+- Used to perform mathematical operations.
 
 | Operator | Meaning             | Example | Output |
 |----------|---------------------|---------|--------|
@@ -196,7 +195,7 @@ a = 10
 b = 3
 print(a + b)   # 13
 print(a // b)  # 3
-
+```
 
 ### 📌 2. Comparison Operators
 Used to compare two values. The result is always **True or False**.
@@ -216,7 +215,7 @@ Example:
 x = 10
 y = 5
 print(x > y)  # True
-
+```
 ---
 
 ### 3. Logical Operators
@@ -233,7 +232,7 @@ Example:
 ```python
 age = 25
 print(age > 18 and age < 60)  # True
-
+```
 
 ---
 
@@ -262,7 +261,7 @@ Used to check if a value exists in a sequence.
 
 ```fruits = ["apple", "banana"]
 print("apple" in fruits)  # True
-
+```
 ---
 
 ### 7. Identity Operators
@@ -273,6 +272,8 @@ Used to compare memory locations of two objects.
 | is       | Same object       | a is b     |
 | is not   | Different objects | a is not b |
 
-```x = [1, 2]
+```
+x = [1, 2]
 y = x
 print(x is y)  # True
+```
