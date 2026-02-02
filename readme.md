@@ -574,3 +574,84 @@ for i in range(1, 11):
 - `break` stops the loop immediately  
 - `continue` skips the current loop cycle  
 - Loops reduce repeated code and save time  
+
+
+# 🔁 `break` and `continue` in Python
+
+When working with loops, sometimes we want to **change the normal flow** of the loop.  
+Python provides two special statements for this:
+
+- `break`
+- `continue`
+
+---
+
+## 🛑 `break` Statement
+
+The **break** statement is used to **stop the loop immediately**, even if the loop condition is still true.
+
+👉 It completely exits the loop.
+
+### Syntax:
+```python
+for variable in sequence:
+    if condition:
+        break
+```
+
+# Example Using break in a for loop
+```
+for i in range(1, 6):
+    if i == 3:
+        break
+    print(i)
+```
+### Example Using break in a while loop
+```
+i = 1
+while i <= 5:
+    if i == 4:
+        break
+    print(i)
+    i += 1
+```
+----
+### continue Statement
+- The continue statement is used to skip the current iteration and move to the next one.
+
+# Syntax:
+```
+for variable in sequence:
+    if condition:
+        continue
+```
+# Example Using continue in a for loop
+```
+for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i)
+```
+# Example Using continue in a while loop
+```
+i = 0
+while i < 5:
+    i += 1
+    if i == 3:
+        continue
+    print(i)
+
+```
+---
+
+# Important Points to Remember
+
+- `break` is used to exit a loop early
+
+- `continue` is used to skip one iteration
+
+- Both are used inside loops (for or while)
+
+These help control loop behavior more efficiently
+
+
