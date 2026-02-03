@@ -575,6 +575,7 @@ for i in range(1, 11):
 - `continue` skips the current loop cycle  
 - Loops reduce repeated code and save time  
 
+----   
 
 # 🔁 `break` and `continue` in Python
 
@@ -653,5 +654,194 @@ while i < 5:
 - Both are used inside loops (for or while)
 
 These help control loop behavior more efficiently
+
+----
+
+
+# 🔤 String Operations in Python 
+
+---
+
+## 📌 What is a String?
+
+A **string** is a sequence of characters (letters, numbers, symbols) enclosed in quotes.
+
+Examples:
+```python
+name = "Rahul"
+message = 'Hello World'
+```
+
+### 1. String Concatenation (Joining Strings)
+# We use + to join two strings.
+
+# Example 
+
+```
+first = "Hello"
+second = "World"
+result = first + " " + second
+print(result)
+```
+
+# 2. String Repetition
+```
+word = "Hi "
+print(word * 3)
+```
+
+# 3. Finding Length of a String
+- We use the len() function.
+```
+text = "Python"
+print(len(text))
+```
+# 4. Accessing Characters (Indexing)
+- Each character in a string has an index number.
+- Example
+```
+text = "Python"
+print(text[0])  # First character
+print(text[3])  # Fourth character
+
+```
+---
+
+# 5. String Slicing
+- Slicing is used to get part of a string.
+```
+text = "Python"
+print(text[0:4])
+```
+---
+###  6. Changing Case
+```
+text = "python"
+print(text.upper())   # PYTHON
+print(text.lower())   # python
+print(text.capitalize())  # Python
+```
+# Checking Text
+```
+text = "Hello Python"
+
+print("Python" in text)   # True
+print("Java" not in text) # True
+```
+
+# 8. Replacing Text
+```
+text = "I like Java"
+print(text.replace("Java", "Python"))
+```
+---
+
+# 9. Removing Spaces
+```
+text = "  Hello  "
+print(text.strip())
+```
+# Splitting a String
+```
+text = "apple,banana,orange"
+fruits = text.split(",")
+print(fruits)
+```
+- output
+
+['apple', 'banana', 'orange']
+
+
+# 11. Joining Strings from a List
+```
+words = ["Python", "is", "fun"]
+sentence = " ".join(words)
+print(sentence)
+```
+
+----
+
+# Strings have many built-in functions that make text processing easy.
+
+## 📌 Case Conversion Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `upper()` | Converts string to uppercase | `"python".upper()` → `PYTHON` |
+| `lower()` | Converts string to lowercase | `"PYTHON".lower()` → `python` |
+| `capitalize()` | First letter capital | `"python".capitalize()` → `Python` |
+| `title()` | Capitalizes each word | `"hello world".title()` → `Hello World` |
+| `swapcase()` | Swaps upper & lower case | `"PyThOn".swapcase()` → `pYtHoN` |
+
+---
+
+## 📌 Searching Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `find()` | Returns index of substring | `"hello".find("e")` → `1` |
+| `rfind()` | Finds from right | `"hello".rfind("l")` → `3` |
+| `index()` | Like find but gives error if not found | `"hello".index("e")` → `1` |
+| `count()` | Counts occurrences | `"banana".count("a")` → `3` |
+| `startswith()` | Checks starting text | `"python".startswith("py")` → `True` |
+| `endswith()` | Checks ending text | `"python".endswith("on")` → `True` |
+
+---
+
+## 📌 Checking (Boolean) Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `isalpha()` | Only letters | `"Hello".isalpha()` → `True` |
+| `isdigit()` | Only numbers | `"123".isdigit()` → `True` |
+| `isalnum()` | Letters & numbers | `"abc123".isalnum()` → `True` |
+| `islower()` | All lowercase | `"hello".islower()` → `True` |
+| `isupper()` | All uppercase | `"HELLO".isupper()` → `True` |
+| `isspace()` | Only spaces | `"   ".isspace()` → `True` |
+| `istitle()` | Title case | `"Hello World".istitle()` → `True` |
+
+---
+
+## 📌 Modification Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `replace()` | Replaces text | `"I like Java".replace("Java","Python")` |
+| `strip()` | Removes spaces both sides | `"  hi  ".strip()` → `"hi"` |
+| `lstrip()` | Removes left spaces | `"  hi".lstrip()` → `"hi"` |
+| `rstrip()` | Removes right spaces | `"hi  ".rstrip()` → `"hi"` |
+| `split()` | Splits into list | `"a,b,c".split(",")` |
+| `join()` | Joins list into string | `" ".join(["Hi","All"])` |
+
+---
+
+## 📌 Alignment Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `center()` | Center align text | `"hi".center(10)` |
+| `ljust()` | Left align | `"hi".ljust(10)` |
+| `rjust()` | Right align | `"hi".rjust(10)` |
+| `zfill()` | Fills with zeros | `"5".zfill(3)` → `"005"` |
+
+---
+
+## 📌 Other Useful Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `len()` | Length of string | `len("Python")` → `6` |
+| `format()` | String formatting | `"My name is {}".format("Rahul")` |
+| `encode()` | Converts to bytes | `"hello".encode()` |
+
+---
+
+## ⭐ Important Points
+
+- Strings are **immutable** (cannot be changed directly)
+- Most string functions return a **new string**
+- Indexing starts from **0**
+- Strings support slicing like `text[0:3]`
+
 
 
