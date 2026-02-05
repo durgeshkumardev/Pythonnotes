@@ -844,4 +844,126 @@ print(sentence)
 - Strings support slicing like `text[0:3]`
 
 
+---
+
+## 📌 What is a Function?
+
+A **function** is a reusable block of code that performs a specific task.
+
+Instead of writing the same code again and again, we write it once inside a function and call it whenever needed.
+
+Think of a function like a **machine**:
+Input ➜ Process ➜ Output
+
+---
+
+## ❓ Why Do We Need Functions?
+
+Without functions:
+- Code becomes very long
+- Hard to understand
+- Repetition of code
+
+With functions:
+- Code becomes short
+- Easy to understand
+- Reusable
+- Well organized
+
+---
+
+## 🌟 Advantages of Functions
+
+✔ Code Reusability  
+✔ Easy Debugging  
+✔ Better Readability  
+✔ Saves Time  
+✔ Breaks big problems into small parts  
+✔ Helpful in teamwork  
+
+---
+
+## 🔢 Types of Functions in Python
+
+### 1️⃣ Built-in Functions
+These are already provided by Python.
+
+Examples:
+```python
+print()
+len()
+type()
+sum()
+max()
+min()
+```
+# 2️⃣ User-Defined Functions
+- Functions created by the programmer using def.
+```
+def greet():
+    print("Hello!")
+```
+
+### Functions Based on Arguments and Return Value
+# A) No Arguments, No Return Value
+```
+def hello():
+    print("Hello World")
+
+hello()
+```
+# B) Arguments, No Return Value
+```
+def greet(name):
+    print("Hello", name)
+
+greet("Durgesh")
+
+```
+### No Arguments, With Return Value
+```
+def get_number():
+    return 10
+
+print(get_number())
+```
+# D) Arguments, With Return Value
+```
+def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(result)
+```
+
+
+### How to Define a Function
+- Syntax:
+```
+def function_name(parameters):
+    # code block
+    return value   # optional
+```
+### How to Call a Function
+- After defining a function, you must call it.
+```
+function_name(arguments)
+```
+
+----
+# Example Combining Everything
+```
+def student_info(name, age):
+    print("Name:", name)
+    print("Age:", age)
+    return "Data Saved"
+
+msg = student_info("Durgesh", 22)
+print(msg)
+```
+
+
+
+
+
 
