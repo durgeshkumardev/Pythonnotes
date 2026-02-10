@@ -963,6 +963,99 @@ print(msg)
 ```
 
 
+---
+
+
+## 📌 What is a Data Structure?
+
+A **data structure** is a way to **store, organize, and manage data** efficiently
+so that it can be accessed and modified easily.
+
+Example:
+- List of students
+- Marks of subjects
+- User details (name, age, email)
+
+---
+
+## ❓ Why Do We Use Data Structures?
+
+Without data structures:
+- Data is unorganized
+- Searching is slow
+- Updating is difficult
+
+With data structures:
+- Data is organized
+- Faster access
+- Easy modification
+- Better performance
+
+---
+
+## 🔢 Types of Data Structures in Python
+
+Python has **4 built-in data structures**:
+
+| Data Structure | Ordered | Mutable | Allows Duplicates |
+|---------------|--------|---------|-------------------|
+| List | Yes | Yes | Yes |
+| Tuple | Yes | No | Yes |
+| Set | No | Yes | No |
+| Dictionary | Yes | Yes | No (keys) |
+
+---
+
+# 1️⃣ List
+
+## 📌 What is a List?
+A **list** is an ordered and mutable collection of items.
+
+### Syntax
+```python
+my_list = [1, 2, 3, "Python"]
+```
+---
+
+# 2️⃣ Tuple
+# What is a Tuple?
+- A tuple is an ordered but immutable collection.
+
+# Syntax
+```
+my_tuple = (1, 2, 3)
+```
+# Example
+```
+colors = ("red", "green", "blue")
+
+```
+# Where Tuple is Used?
+-Fixed data
+
+-Coordinates (x, y)
+
+-Configuration values
+---
+
+# 3️⃣ Set
+# What is a Set?
+-A set is an unordered collection of unique elements.
+
+# Syntax
+```
+my_set = {1, 2, 3}
+```
+# Where Set is Used?
+
+-Removing duplicates
+
+-Membership testing
+
+-Mathematical operations
+
+
+
 
 
 
