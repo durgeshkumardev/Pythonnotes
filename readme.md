@@ -1048,11 +1048,11 @@ my_set = {1, 2, 3}
 ```
 # Where Set is Used?
 
--Removing duplicates
+- Removing duplicates
 
--Membership testing
+- Membership testing
 
--Mathematical operations
+- Mathematical operations
 
 
 
