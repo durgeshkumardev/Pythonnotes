@@ -1055,7 +1055,138 @@ my_set = {1, 2, 3}
 - Mathematical operations
 
 
+---
+# 4️⃣ Dictionary
 
+#  What is a Dictionary?
+- A dictionary stores data in key–value pairs.
+# Syntax
+```
+student = {
+    "name": "Durgesh",
+    "age": 22,
+    "course": "Python"
+}
+
+```
+
+--- 
+# All Operations & Functions
+# 🔹 1. LIST (Ordered, Mutable, Allows Duplicates)
+
+# ✅ Create a List
+
+- syntax
+
+```
+numbers = [10, 20, 30, 40]
+
+```
+
+# List Functions & Operations
+
+# Add Elements
+```
+numbers.append(50)
+numbers.insert(1, 15)
+numbers.extend([60, 70])
+```
+# Remove Elements
+```
+numbers.remove(20)   # remove by value
+numbers.pop()        # remove last
+numbers.pop(1)       # remove by index
+numbers.clear()      # remove all
+```
+# Access Elements
+
+```
+numbers[0]
+numbers[-1]
+numbers[1:4]
+
+```
+# Update Elements
+
+```
+numbers[0] = 100
+```
+# List Information
+```
+len(numbers)
+max(numbers)
+min(numbers)
+sum(numbers)
+```
+# Sort & Reverse
+
+```
+numbers.sort()
+numbers.sort(reverse=True)
+numbers.reverse()
+```
+# Search
+```
+numbers.index(30)
+numbers.count(10)
+```
+# 🔄 Loop
+```
+for n in numbers:
+    print(n)
+```
+# Where List is Used?
+
+- Dynamic data
+-  Student lists
+- Shopping carts
+
+---
+
+# 2. TUPLE (Ordered, Immutable, Allows Duplicates)
+# Create a Tuple
+```
+colors = ("red", "green", "blue", "red")
+
+```
+# Tuple Functions & Operations
+# Access
+```
+colors[0]
+colors[-1]
+colors[1:3]
+```
+
+# Tuple Information
+- syntax
+```
+len(colors)
+colors.count("red")
+colors.index("green")
+```
+
+# Loop
+```
+for c in colors:
+    print(c)
+```
+
+# Convert Tuple
+
+```
+list(colors)
+tuple([1, 2, 3])
+```
+
+# Cannot modify:
+```
+colors[0] = "black"  # ERROR
+```
+# Where Tuple is Used?
+
+- Fixed data
+- Coordinates
+- Read-only values
 
 
 
