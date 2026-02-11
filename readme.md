@@ -1187,6 +1187,95 @@ colors[0] = "black"  # ERROR
 - Fixed data
 - Coordinates
 - Read-only values
+---- 
+
+# 3. SET (Unordered, Mutable, No Duplicates)
+
+# Create a Set
+```
+nums = {1, 2, 3, 4}
+```
+
+# Set Functions & Operations
+# Add Elements
+```
+nums.add(5)
+nums.update([6, 7])
+```
+# Remove Elements
+```
+nums.remove(3)
+nums.discard(10)  # no error if not found
+nums.pop()
+nums.clear()
+```
+# Membership
+```
+2 in nums
+```
+# Set Mathematical Operations
+
+```
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+a.union(b)
+a.intersection(b)
+a.difference(b)
+a.symmetric_difference(b)
+
+```
+# Loop
+```
+for n in nums:
+    print(n)
+```
+
+# Where Set is Used?
+
+
+---
+4. DICTIONARY (Key–Value Pairs)
+
+# Create Dictionary
+```
+student = {
+    "name": "Durgesh",
+    "age": 22,
+    "course": "Python"
+}
+```
+# Dictionary Functions & Operations
+```
+student["name"]
+student.get("age")
+```
+# Add / Update
+```
+student["city"] = "Delhi"
+student["age"] = 23
+```
+
+# Remove
+```
+student.pop("age")
+del student["course"]
+student.clear()
+```
+
+# Dictionary Info
+```
+student.keys()
+student.values()
+student.items()
+len(student)
+```
+# Loop Dictionary
+```
+for key, value in student.items():
+    print(key, value)
+```
+
 
 
 
