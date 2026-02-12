@@ -1275,8 +1275,373 @@ len(student)
 for key, value in student.items():
     print(key, value)
 ```
+----
+
+# What is List Comprehension?
+-List comprehension is a short and clean way to create lists using a single line of code instead of writing long loops.
+
+-It replaces:
+
+-for loop
+
+-append()
+
+-Multiple lines of code
+
+-with one readable line.
+
+# Why Do We Use List Comprehension?
+-Without list comprehension:
+
+-❌ More code
+-❌ Less readable
+-❌ Slower to write
+
+# With list comprehension:
+
+-✅ Short code
+-✅ More readable
+-✅ Faster execution
+-✅ Pythonic way (preferred in Python)
+
+# Basic Syntax
+```
+[expression for item in iterable]
+```
+#  Meaning:
+-expression → What you want to store
+
+-item → Each value from loop
+
+-iterable → List / range / string etc.
+
+# Example 1: Without vs With List Comprehension
+
+```
+numbers = []
+for i in range(5):
+    numbers.append(i)
+
+print(numbers)
+```
+# Using List Comprehension
+```
+numbers = [i for i in range(5)]
+print(numbers)
+
+```
+
+# Example 2: Square of Numbers
+# Using Loop
+```
+squares = []
+for i in range(1, 6):
+    squares.append(i*i)
+```
+# Using List Comprehension
+```
+squares = [i*i for i in range(1, 6)]
+```
+
+# Example 3: With Condition (if)
+
+# Syntax
+```
+[expression for item in iterable if condition]
+```
+
+# Get Only Even Numbers
+
+```
+evens = [i for i in range(10) if i % 2 == 0]
+print(evens)
+```
+# Example 4: Convert Strings to Uppercase
+
+```
+names = ["durgesh", "aman", "ravi"]
+
+upper_names = [name.upper() for name in names]
+print(upper_names)
+```
+
+# Example 5: Filter Data
+```
+names = ["Ram", "Durgesh", "Amit", "Shiv"]
+
+long_names = [n for n in names if len(n) > 4]
+print(long_names)
+```
+
+# Normal Loop vs List Comprehension
+
+| Feature     | Loop   | List Comprehension |
+| ----------- | ------ | ------------------ |
+| Code Length | Long   | Short              |
+| Readability | Medium | High               |
+| Speed       | Slower | Faster             |
+| Pythonic    | No     | Yes                |
+
+---
+
+# What is Exception Handling in Python?
+-Exception Handling is a way to handle runtime errors so that the program does not stop suddenly and can continue safely.
+
+# It allows you to manage errors using:
+```
+try → except → else → finally
+```
+
+# Why Do We Need Exception Handling?
+Without exception handling:
+❌ Program crashes
+❌ User sees error messages
+❌ Application stops working
+
+With exception handling:
+✅ Prevent crashes
+✅ Show friendly messages
+✅ Handle invalid input
+✅ Safe execution
+
+# Basic Syntax
+```
+try:
+    # Code that may cause error
+except:
+    # Code to handle error
+```
+
+# Example 1: Handling Division Error
+```
+try:
+    a = int(input("Enter number: "))
+    b = int(input("Enter number: "))
+    print(a / b)
+except:
+    print("Error occurred!")
+```
+
+# Catch Specific Exception (Best Practice)
+
+```
+try:
+    x = int("abc")
+except ValueError:
+    print("Invalid conversion!")
+```
+
+# Multiple Exceptions
+
+```
+try:
+    a = int(input())
+    b = int(input())
+    print(a / b)
+except ValueError:
+    print("Enter valid number!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+```
+
+# Using else Block
+
+```
+try:
+    x = int(input("Enter number: "))
+except ValueError:
+    print("Invalid input")
+else:
+    print("You entered:", x)
+```
+# Using finally Block
+-Always runs whether error occurs or not.
+```
+try:
+    print("Trying...")
+except:
+    print("Error")
+finally:
+    print("This always runs")
+```
+
+# Full Structure
+
+```
+try:
+    # risky code
+except ExceptionType:
+    # handle error
+else:
+    # runs if no error
+finally:
+    # always runs
+```
+
+# Example: Real-Life Input Validation
+```
+try:
+    age = int(input("Enter age: "))
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+except ValueError as e:
+    print("Error:", e)
+else:
+    print("Age saved successfully")
+```
+# Raising Custom Exception
+
+```
+x = -5
+
+if x < 0:
+    raise Exception("Negative value not allowed")
+```
+# Exception Object (as e)
+```
+try:
+    10 / 0
+except ZeroDivisionError as e:
+    print("Error message:", e)
+```
+
+# File Handling with Exception (Real Use)
+
+```
+try:
+    f = open("data.txt")
+except FileNotFoundError:
+    print("File not found!")
+finally:
+    print("Execution complete")
+```
+--- 
+# 
+# What is File Handling?
+# File Handling means working with files to:
+-Create files
+
+-Read data
+
+-Write data
+
+-Update data
+
+-Delete data
+
+-Python provides built-in functions to do this.
+---
+# Why Do We Use File Handling?
+# Without files:
+#❌ Data is temporary (lost after program ends)
+
+#With files:
+-✅ Data is saved permanently
+-✅ Used for logs, reports, user data
+-✅ Helps in real-world applications
+
+# Opening a File
+# Syntax:
+```
+open("filename", "mode")
+```
+
+# File Modes
+
+| Mode | Meaning             |
+| ---- | ------------------- |
+| `r`  | Read file           |
+| `w`  | Write (overwrite)   |
+| `a`  | Append              |
+ 
+| `b`  | Binary mode         |
+| `t`  | Text mode (default) |
 
 
+# Reading a File
 
+# Read Entire File
+```
+f = open("data.txt", "r")
+print(f.read())
+f.close()
+```
+# Read One Line
+
+```
+print(f.readline())
+```
+# Read All Lines as List
+
+```
+print(f.readlines())
+```
+
+# Writing to a File
+# Overwrite Content
+```
+f = open("data.txt", "w")
+f.write("Hello Python\n")
+f.write("File handling example")
+f.close()
+```
+-w deletes old data.
+
+# Append Data (Recommended)
+```
+f = open("data.txt", "a")
+f.write("\nNew Line Added")
+f.close()
+```
+# Using with (Best Practice ✅)
+# Automatically closes file.
+```
+with open("data.txt", "r") as f:
+    print(f.read())
+```
+
+# Writing Using with
+```
+with open("data.txt", "w") as f:
+    f.write("Safe writing using with")
+```
+
+# Loop Through File
+```
+with open("data.txt") as f:
+    for line in f:
+        print(line.strip())
+```
+
+# Check if File Exists
+```
+import os
+
+if os.path.exists("data.txt"):
+    print("File exists")
+else:
+    print("File not found")
+```
+# Delete a File
+```
+import os
+os.remove("data.txt")
+```
+
+# File Handling with Exception (Important)
+```
+try:
+    with open("data.txt", "r") as f:
+        print(f.read())
+except FileNotFoundError:
+    print("File does not exist!")
+```
+# Real-Life Example: Save User Input
+```
+name = input("Enter name: ")
+
+with open("users.txt", "a") as f:
+    f.write(name + "\n")
+```
 
 
