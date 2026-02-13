@@ -1643,5 +1643,346 @@ name = input("Enter name: ")
 with open("users.txt", "a") as f:
     f.write(name + "\n")
 ```
+# What is a Decorator in Python?
+
+-A decorator is a function that modifies the behavior of another function without changing its code.
+# In simple words:
+#  Decorator = Wrapper around a function
+-It allows you to:
+
+-Add extra functionality
+
+-Reuse code
+
+-Keep original function clean
+
+# Real-Life Analogy
+Think of a gift box 
+-Original function = gift
+-Decorator = gift wrapping
+The gift is same, but behavior/appearance improves.
+
+# Why Do We Use Decorators?
+-Without decorators:
+-Repeated code
+-Messy functions
+-Hard maintenance
+# With decorators:
+Code reuse
+-Clean functions
+-Separation of concerns
+-Used in authentication, logging, timing
+
+---
+
+
+# Structure of a Decorator
+```
+def decorator_function(original_function):
+    def wrapper():
+        # extra work
+        original_function()
+        # extra work
+    return wrapper
+```
+
+# First Important Concept (Functions are Objects)
+# In Python:
+
+-Functions can be stored in variables
+-Functions can be passed to other functions
+-Functions can return functions
+
+# Example
+```
+def greet():
+    print("Hello")
+
+say_hello = greet
+say_hello()
+```
+# How Decorator Works
+# Simple Function
+```
+def my_func():
+    print("Hello Durgesh")
+```
+# 2 Create Wrapper Function
+```
+def decorator_func(func):
+    def wrapper():
+        print("Before function call")
+        func()
+        print("After function call")
+    return wrapper
+```
+# 3 Apply Decorator (Manual Way)
+```
+def my_func():
+    print("Hello Durgesh")
+
+my_func = decorator_func(my_func)
+
+my_func()
+```
+# 4 Using @ Decorator Syntax (Important)
+-Python gives shortcut syntax.
+# example
+```
+def decorator_func(func):
+    def wrapper():
+        print("Before function call")
+        func()
+        print("After function call")
+    return wrapper
+
+@decorator_func
+def my_func():
+    print("Hello Durgesh")
+
+my_func()
+```
+---
+# Decorator with Arguments (VERY IMPORTANT)
+# Problem (Without args support)
+```
+@decorator_func
+def add(a, b):
+    print(a + b)
+```
+# Correct Way (Use *args, **kwargs)
+```
+def decorator_func(func):
+    def wrapper(*args, **kwargs):
+        print("Before execution")
+        func(*args, **kwargs)
+        print("After execution")
+    return wrapper
+
+@decorator_func
+def add(a, b):
+    print(a + b)
+
+add(5, 3)
+```
+---
+
+# Decorator with Return Value
+```
+def decorator_func(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+@decorator_func
+def add(a, b):
+    return a + b
+
+print(add(2, 3))
+```
+
+# Multiple Decorators
+```
+def deco1(func):
+    def wrapper():
+        print("Deco1")
+        func()
+    return wrapper
+
+def deco2(func):
+    def wrapper():
+        print("Deco2")
+        func()
+    return wrapper
+
+@deco1
+@deco2
+def say_hi():
+    print("Hi")
+
+say_hi()
+```
+---
+
+# What is a Module in Python?
+# A module is simply a Python file (.py) that contains:
+-functions
+
+-variables
+
+-classes
+
+-which you can reuse in another Python file using import.
+
+# In simple words:
+-Module = Python file for reusable code
+# Why Do We Use Modules?
+# Without modules:
+
+-Big messy file
+-Code duplication
+-Hard to maintain
+
+# With modules:
+-Code reuse
+-Better organization
+-Easy maintenance
+-Used in large projects
+--- 
+
+# Types of Modules
+# Python has three main types:
+# 1 Built-in Modules
+# Examples:
+-math
+-random
+-datetime
+-os
+-sys
+--- 
+# User-Defined Modules
+# Created by you.
+-Example file: mymodule.py
+
+---
+# External Modules (Third-party)
+# Installed using pip.
+
+# Examples:
+-requests
+
+-numpy
+
+-pandas
+
+-django
+
+# How to Import a Module
+
+# Example
+```
+import math
+print(math.sqrt(16))
+
+```
+
+# Most Important Built-in Modules
+#  1. math Module
+
+# Used for mathematical operations.
+# Example
+```
+import math
+
+math.sqrt(16)
+math.pow(2, 3)
+math.ceil(4.2)
+math.floor(4.8)
+math.pi
+math.factorial(5)
+```
+# 2 random Module
+-Used to generate random values.
+# Examples
+```
+import random
+
+random.randint(1, 10)
+random.random()
+random.choice([10, 20, 30])
+random.shuffle(list1)
+```
+- Used in:
+-Games
+
+-OTP generation
+
+-Simulations
+
+# datetime Module ⭐ VERY IMPORTANT
+# Example 
+```
+from datetime import datetime
+
+now = datetime.now()
+print(now)
+
+print(now.date())
+print(now.time())
+```
+---
+
+# os Module ⭐ IMPORTANT
+# Used for operating system tasks.
+# Examples
+```
+import os
+
+os.getcwd()
+os.listdir()
+os.mkdir("test")
+os.remove("file.txt")
+os.path.exists("file.txt")
+```
+# sys Module
+# Used for Python runtime environment.
+# Examples
+```
+import sys
+
+print(sys.version)
+print(sys.argv)
+sys.exit()
+```
+---
+
+# Module vs Package in Python
+# What is a Module?
+-A module is a single Python file (.py) that contains:
+-functions
+-classes
+-variables
+#  Example
+# File: math_utils.py
+```
+def add(a, b):
+    return a + b
+```
+# Use it:
+```
+import math_utils
+print(math_utils.add(2, 3))
+```
+---
+# What is a Package?
+# A package is a folder that contains multiple modules (and possibly sub-packages).
+-Package = directory of modules
+# Usually contains:
+-many .py files
+-an __init__.py file (optional in modern Python but common)
+
+# Package Structure Example
+```
+myproject/
+│
+├── calculator/
+│   ├── __init__.py
+│   ├── add.py
+│   └── subtract.py
+│
+└── main.py
+```
+
+# Using Package
+```
+from calculator.add import add
+```
+
+
+ 
+
+
+
 
 
