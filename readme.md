@@ -1980,6 +1980,197 @@ from calculator.add import add
 ```
 
 
+---
+
+# What is JSON?
+-JSON = JavaScript Object Notation
+
+-It is a lightweight data format used to store and exchange data between systems.
+
+# Simple meaning:
+# JSON = text format to represent structured data
+
+# JSON Example
+```
+{
+  "name": "XYZ",
+  "age": 0,
+  "is_student": true
+}
+```
+
+-Looks like a Python dictionary, but it is string-based text.
+# Why JSON is Used?
+- JSON is used because it is:
+Easy to read
+-Easy to write
+-Lightweight
+-Language independent
+-Perfect for APIs
+---
+# Where JSON is Used (Real World)
+Web APIs
+-Frontend ↔ Backend communication
+-Configuration files
+-Data storage
+-NoSQL databases
+-Mobile apps
+
+# JSON vs Python Dictionary
+
+---
+| Feature | JSON               | Python Dict   |
+| ------- | ------------------ | ------------- |
+| Quotes  | Double quotes only | Single/double |
+| Boolean | true/false         | True/False    |
+| Null    | null               | None          |
+| Type    | String format      | Python object |
+
+---
+
+
+# JSON in Python
+
+-Python uses the built-in json module.
+
+```
+import json
+```
+# Two Most Important Functions
+
+# 1. json.dumps() → Python → JSON string
+
+-dumps = dump string
+# Example
+```
+import json
+
+data = {"name": "Durgesh", "age": 22}
+
+json_data = json.dumps(data)
+print(json_data)
+```
+
+# 2. json.loads() → JSON string → Python
+
+# loads = load string
+
+# Example
+
+
+```
+import json
+
+json_data = '{"name": "Durgesh", "age": 22}'
+
+python_obj = json.loads(json_data)
+print(python_obj["name"])
+
+```
+
+# File-Based JSON Functions
+# json.dump() → Python → JSON file
+
+```
+import json
+
+data = {"name": "Durgesh", "age": 22}
+
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=4)
+```
+# json.load() → JSON file → Python
+
+```
+import json
+
+with open("data.json", "r") as f:
+    data = json.load(f)
+
+print(data)
+
+```
+# dumps vs dump (Very Important)
+
+| Function   | Works With | Purpose                |
+| ---------- | ---------- | ---------------------- |
+| json.dumps | string     | convert to JSON string |
+| json.dump  | file       | write JSON to file     |
+| json.loads | string     | JSON string → Python   |
+| json.load  | file       | JSON file → Python     |
+
+
+# Pretty Print JSON
+-json.dumps(data, indent=4)
+
+# Sorting Keys
+
+```
+json.dumps(data, indent=4, sort_keys=True)
+```
+
+# Convert Complex Data
+```
+data = {
+    "students": ["Durgesh", "Aman"],
+    "marks": [90, 85]
+}
+
+print(json.dumps(data, indent=4))
+```
+# Common Errors
+
+-Invalid JSON quotes
+```
+{'name': 'Durgesh'}
+```
+# Right:
+
+```
+{"name": "Durgesh"}
+```
+---
+
+# Advantages of JSON
+Lightweight
+-Human readable
+-Language independent
+-Easy parsing
+-Widely supported
+-Perfect for APIs
+-Faster than XML
+
+---
+# Disadvantages of JSON
+No comments support
+-Only basic data types
+-Not good for very large binary data
+-Less secure if not validated
+-No schema enforcement (by default)
+
+---
+
+# Real-Life Example: API Response
+
+```
+import json
+
+response = '{"status":"success","data":{"name":"Durgesh"}}'
+
+data = json.loads(response)
+print(data["data"]["name"])
+```
+
+----
+
+
+
+
+
+
+
+
+
  
 
 
