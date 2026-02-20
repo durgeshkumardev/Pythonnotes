@@ -917,7 +917,7 @@ hello()
 def greet(name):
     print("Hello", name)
 
-greet("Durgesh")
+greet("XYZ")
 
 ```
 ### No Arguments, With Return Value
