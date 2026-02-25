@@ -2163,6 +2163,33 @@ print(data["data"]["name"])
 
 ----
 
+import json
+import os
+ 
+FILE_NAME = "students.json"
+ 
+ 
+# ===============================
+# 🔹 Load Data
+# ===============================
+def load_data():
+    if os.path.exists(FILE_NAME):
+        try:
+            with open(FILE_NAME, "r") as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            return {}
+    return {}
+ 
+ 
+# ===============================
+# 🔹 Save Data
+# ===============================
+def save_data(data):
+    with open(FILE_NAME, "w") as file:
+        json.dump(data, file, indent=4)
+ 
+
 
 
 
