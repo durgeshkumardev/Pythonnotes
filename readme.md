@@ -2172,6 +2172,7 @@ FILE_NAME = "students.json"
 # ===============================
 # 🔹 Load Data
 # ===============================
+```
 def load_data():
     if os.path.exists(FILE_NAME):
         try:
@@ -2180,15 +2181,19 @@ def load_data():
         except json.JSONDecodeError:
             return {}
     return {}
+```    
  
  
 # ===============================
 # 🔹 Save Data
 # ===============================
+```
 def save_data(data):
     with open(FILE_NAME, "w") as file:
         json.dump(data, file, indent=4)
+```        
  
+---
 
 
 
@@ -2196,6 +2201,8 @@ def save_data(data):
 
 
 
+
+------
 
 
  
