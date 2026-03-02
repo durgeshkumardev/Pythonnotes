@@ -2195,14 +2195,138 @@ def save_data(data):
  
 ---
 
+# Default Parameters
+-Definition
+A default parameter is a parameter that already has a value assigned.
+If the user does not provide a value, Python uses the default.
+
+# Example
+
+```
+def greet(name="Student"):
+    print("Hello", name)
+
+greet("Aman")   # uses given value
+greet()         # uses default value
+```
+# Default parameters must always come after normal parameters.
+# Wrong
+```
+def fun(a=10, b):   # SyntaxError
+    pass
+```
+# Correct
+```
+def fun(a, b=10):
+    pass
+```
+---
 
 
+# Function vs Method 
+# Function
+-A function is defined outside any class.
+
+```
+def add(a, b):
+    return a + b
+```
+
+# Method
+# A method is a function defined inside a class.
+```
+class Demo:
+    def show(self):
+        print("This is a method")
+```
+
+# What is OOP?
+-Object-Oriented Programming (OOP) is a programming style that organizes code using objects and classes to model real-world entities.
 
 
+# OOP is a programming paradigm based on the concept of classes and objects.
+
+# Real-World Example (Best for Teaching)
+
+-Consider a Car:
+---
+| Real World       | OOP Concept |
+| ---------------- | ----------- |
+| Car design       | Class       |
+| My car           | Object      |
+| Color, speed     | Attributes  |
+| Drive(), brake() | Methods     |
+---
 
 
+# Four Pillars of OOP (Very Important)
+-OOP is built on four main pillars:
 
-------
+# 1 Encapsulation
+-Wrapping data and methods together
+-Data hiding and protection
+
+-One-line: Protect the data.
+---
+# 2 Inheritance
+-One class acquires properties of another class
+-One-line: Child uses parent features.
+
+# 3 Polymorphism
+-Same method name behaves differently
+
+# 4 Abstraction
+-Hiding internal implementation details
+---
+
+
+# What is a Class?
+-A class is a blueprint or template used to create objects
+
+-It defines:
+-attributes (data)
+
+-methods (functions)
+
+# Basic Syntax
+```
+class Student:
+    pass
+```
+
+# What is an Object?
+-An object is an instance of a class.
+
+s1 = Student()
+
+---
+
+# What is an Attribute?
+-n attribute is a variable that belongs to a class or object.
+
+---
+```
+class Student:
+    def __init__(self, name):
+        self.name = name
+```
+-name → parameter
+
+-self.name → attribute (object data)        
+
+
+# What is a Method?
+-A method is a function defined inside a class that operates on objects.
+
+```
+class Student:
+    def greet(self):
+        print("Hello Student")
+```        
+
+---
+
+
 
 
  
