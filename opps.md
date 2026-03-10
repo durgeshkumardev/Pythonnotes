@@ -13,6 +13,8 @@ class Car:
     brand="Toyota"
 ```
 
+# What is object 
+An object is an instance of a class that can access the data (attributes) and methods (functions) defined in the class and represents a real-world entity.
 
 # Real-life example:
 - Class = Car Design
