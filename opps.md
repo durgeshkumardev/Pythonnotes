@@ -298,21 +298,21 @@ s.showStudent()
 - When one child class inherits from one parent class.
 - Example
 ```
-class Animal:
-    def eat(self):
-        print("Animal is eating")
+class Father:
+    def show(self):
+        print("This is father class")
 
-class Dog(Animal):
-    def bark(self):
-        print("Dog is barking")
+class Son(Father):
+    def display(self):
+        print("This is son class")
 
-d = Dog()
+obj = Son()
 
-d.eat()
-d.bark()
+obj.show()
+obj.display()
 ```
 # 2 Multiple Inheritance
-- When one child class inherits from multiple parent classes.
+-  When one child class inherits from multiple parent classes.
 - Structure
 ```
 Parent1   Parent2
@@ -323,20 +323,22 @@ Parent1   Parent2
 
 ```
 class Father:
-    def skills(self):
-        print("Programming")
+    def father_skill(self):
+        print("Father: Driving")
 
 class Mother:
-    def hobby(self):
-        print("Painting")
+    def mother_skill(self):
+        print("Mother: Cooking")
 
 class Child(Father, Mother):
-    pass
+    def child_skill(self):
+        print("Child: Playing")
 
-c = Child()
+obj = Child()
 
-c.skills()
-c.hobby()
+obj.father_skill()
+obj.mother_skill()
+obj.child_skill()
 ```
 # Multilevel Inheritance
 - Example
@@ -384,32 +386,332 @@ d.bark()
 c.eat()
 c.meow()
 ```
-# Hybrid Inheritance
+
+
+### Encapsulation
+- Encapsulation means wrapping data and methods together in a single unit (class) and restricting direct access to data.
+
+
+### Types of Access Modifiers in Python
+| Type      | Symbol          | Access                       |
+| --------- | --------------- | ---------------------------- |
+| Public    | normal variable | anywhere                     |
+| Protected | `_variable`     | inside class and child class |
+| Private   | `__variable`    | only inside class            |
+
+---
+# Public
+
 ```
-class A:
-    def showA(self):
-        print("A")
+class Student:
 
-class B(A):
-    def showB(self):
-        print("B")
+    def __init__(self,name):
+        self.name = name
 
-class C(A):
-    def showC(self):
-        print("C")
+s1 = Student("Rahul")
 
-class D(B, C):
-    def showD(self):
-        print("D")
+print(s1.name)
+```
 
-d = D()
+# Protected
+```
+class Student:
 
-d.showA()
-d.showB()
-d.showC()
-d.showD()
+    def __init__(self,name,marks):
+        self.name = name
+        self._marks = marks
+
+s1 = Student("Rahul",90)
+
+print(s1._marks)
+```
+
+# Private
+```
+class Student:
+
+    def __init__(self,name,marks):
+        self.name = name
+        self.__marks = marks
+
+    def show_marks(self):
+        print(self.__marks)
+
+s1 = Student("Rahul",90)
+
+s1.show_marks()
+```
+---
+
+# Abstraction
+
+- Abstraction means showing only important information and hiding internal details.
+
+- Abstraction using ABC Module
+- ABC (Abstract Base Class)
+- @abstractmethod
+
+# Example 
+```
+from abc import ABC, abstractmethod
+
+
+class Vehicle(ABC):
+
+    @abstractmethod
+    def start(self):
+        pass
+
+
+class Car(Vehicle):
+
+    def start(self):
+        print("Car starts with key")
+
+
+class Bike(Vehicle):
+
+    def start(self):
+        print("Bike starts with kick")
+
+
+c = Car()
+b = Bike()
+
+c.start()
+b.start()
+```
+- Important Rule
+- Abstract class cannot create object.
+
+- v = Vehicle()
+
+
+# Example 2
+```
+from abc import ABC, abstractmethod
+
+
+class Employee(ABC):
+
+    @abstractmethod
+    def salary(self):
+        pass
+
+
+class Developer(Employee):
+
+    def salary(self):
+        print("Developer salary = 60000")
+
+
+class Manager(Employee):
+
+    def salary(self):
+        print("Manager salary = 80000")
+
+
+employees = [Developer(),Manager()]
+
+for e in employees:
+    e.salary()
+```
+# Polymorphism in Python
+Polymorphism means:
+Same method name but different behavior
+
+- Word meaning:
+- Poly = many
+- Morph = forms
+- One interface → many implementations
+
+# Types of Polymorphism 
+
+- Operator Polymorphism
+- Function Polymorphism
+- Method Polymorphism
+- Polymorphism with Inheritance
+
+# Operator Polymorphism
+```
+print(5 + 3)
+print("Hello " + "World")
+print([1,2] + [3,4])
+```
+# Function Polymorphism
+- Python built-in functions also show polymorphism.
+```
+print(len("Python"))
+print(len([10,20,30]))
+print(len((1,2,3,4)))
+```
+# Polymorphism with Methods
+- Different classes use same method name.
+```
+class Dog:
+
+    def sound(self):
+        print("Dog barks")
+
+
+class Cat:
+
+    def sound(self):
+        print("Cat meows")
+
+
+class Cow:
+
+    def sound(self):
+        print("Cow moos")
+
+
+animals = [Dog(),Cat(),Cow()]
+
+for animal in animals:
+    animal.sound()
+```
+# Polymorphism with Inheritance
+- Child classes override parent method.
+```
+class Animal:
+
+    def sound(self):
+        print("Animal makes sound")
+
+
+class Dog(Animal):
+
+    def sound(self):
+        print("Dog barks")
+
+
+class Cat(Animal):
+
+    def sound(self):
+        print("Cat meows")
+
+
+animals = [Dog(),Cat()]
+
+for a in animals:
+    a.sound()
+```
+# Example
+```
+class Payment:
+
+    def pay(self,amount):
+        pass
+
+
+class CreditCard(Payment):
+
+    def pay(self,amount):
+        print("Paid",amount,"using Credit Card")
+
+
+class PayPal(Payment):
+
+    def pay(self,amount):
+        print("Paid",amount,"using PayPal")
+
+
+class UPI(Payment):
+
+    def pay(self,amount):
+        print("Paid",amount,"using UPI")
+
+
+payments = [CreditCard(),PayPal(),UPI()]
+
+for p in payments:
+    p.pay(500)
+```
+--- 
+
+# Method Overriding
+- A child class provides its own implementation of a method that already exists in the parent class.
+
+Conditions:
+- Must use Inheritance
+
+- Method name same
+
+- Parameters usually same
+
+# Example 
+```
+class Vehicle:
+
+    def start(self):
+        print("Vehicle starts")
+
+
+class Car(Vehicle):
+
+    def start(self):
+        print("Car starts with key")
+
+
+class Bike(Vehicle):
+
+    def start(self):
+        print("Bike starts with kick")
+
+
+v = Vehicle()
+c = Car()
+b = Bike()
+
+v.start()
+c.start()
+b.start()
+```
+# Using super()
+```
+class Person:
+
+    def show(self):
+        print("This is person")
+
+
+class Student(Person):
+
+    def show(self):
+        super().show()
+        print("This is student")
+
+
+s = Student()
+s.show()
 ```
 
 
+---
+# Method Overloading
+- Multiple methods with same name but different parameters.
+
+# Important:
+Python does NOT support true method overloading like Java or C++.
+
+Because Python replaces previous method definitions.
+
+
+# Example 
+
+```
+class Math:
+
+    def add(self,a,b=0,c=0):
+        print(a+b+c)
+
+
+m = Math()
+
+m.add(5)
+m.add(5,10)
+m.add(5,10,15)
+```
 
 
