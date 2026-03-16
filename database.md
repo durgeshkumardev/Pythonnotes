@@ -14,7 +14,7 @@ Data can exist in many forms such as:
 -Video
 -Symbols
 
-For example:
+For example:.
 
 | Name    | Age | Course |
 | ------- | --- | ------ |
@@ -22,6 +22,7 @@ For example:
 | Rahul   | 21  | BBA    |
 
 Here:
+
 -`"xyz"` is data.
 -`20` is data.
 -`BCA` is data.
