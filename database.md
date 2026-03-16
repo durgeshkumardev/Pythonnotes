@@ -23,9 +23,9 @@ For example:.
 
 Here:
 
--"xyz" is data.
--`20` is data.
--`BCA` is data.
+-xyz is data.
+-20 is data.
+-BCA is data.
 Each individual piece of information stored in the table is called `data`.
 
 ---
