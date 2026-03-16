@@ -1,4 +1,4 @@
-# Introduction to Database -- Day 1 (Detailed Lecture Notes)
+# Introduction to Database 
 
 ## 1. What is Data?
 
@@ -341,23 +341,529 @@ Ensures accuracy and consistency.
 Databases support backup and restore features.
 
 ------------------------------------------------------------------------
+# SQL Database vs NoSQL Database (Detailed Explanation)
 
-# 11. Introduction to SQL
+## 1. What is an SQL Database?
 
-**SQL (Structured Query Language)** is used to communicate with
-relational databases.
+An **SQL Database (Structured Query Language Database)** is a type of
+database that stores data in **tables consisting of rows and columns**
+and uses SQL as the language to manage and query the data.
 
-SQL can: - Create tables - Insert data - Update data - Delete data -
-Retrieve data
+These databases are also called **Relational Databases (RDBMS)** because
+the data is organized into **tables that are related to each other**.
 
-Example:
+### Definition
+
+> An SQL database is a relational database system that stores structured
+> data in tables with predefined schemas and uses Structured Query
+> Language (SQL) to insert, update, delete, and retrieve data.
+
+------------------------------------------------------------------------
+
+## Example of SQL Database Table
+
+  StudentID   Name      Course   Age
+  ----------- --------- -------- -----
+  1           Durgesh   BCA      20
+  2           Rahul     BBA      21
+  3           Priya     MCA      22
+
+-   **Table** → Students\
+-   **Row** → Individual student record\
+-   **Column** → Attributes (Name, Course, Age)
+
+### Example SQL Query
 
 ``` sql
 SELECT * FROM Students;
 ```
 
-This command retrieves all records from the Students table.
+------------------------------------------------------------------------
+
+## Popular SQL Databases
+
+-   MySQL
+-   Microsoft SQL Server
+-   PostgreSQL
+-   Oracle Database
 
 ------------------------------------------------------------------------
+
+## Characteristics of SQL Databases
+
+### Structured Data
+
+  ProductID   Product   Price
+  ----------- --------- -------
+  1           Laptop    50000
+  2           Mobile    20000
+
+### Fixed Schema
+
+``` sql
+CREATE TABLE Students (
+ID INT,
+Name VARCHAR(50),
+Course VARCHAR(50)
+);
+```
+
+### Relationships Between Tables
+
+Students Table
+
+  StudentID   Name
+  ----------- ---------
+  1           Durgesh
+
+Courses Table
+
+  CourseID   CourseName
+  ---------- ------------
+  101        BCA
+
+Enrollment Table
+
+  StudentID   CourseID
+  ----------- ----------
+  1           101
+
+------------------------------------------------------------------------
+
+## Advantages of SQL Databases
+
+-   Data Integrity
+-   Strong Relationships
+-   Powerful Queries
+-   Standard Language
+
+------------------------------------------------------------------------
+
+## Disadvantages of SQL Databases
+
+-   Difficult horizontal scaling
+-   Schema must be predefined
+-   Not flexible for unstructured data
+
+------------------------------------------------------------------------
+
+# 2. What is a NoSQL Database?
+
+A **NoSQL database (Not Only SQL)** is a type of database designed to
+store and manage **unstructured or semi-structured data**.
+
+Unlike SQL databases, NoSQL databases do **not rely on tables and fixed
+schemas**.
+
+### Definition
+
+> A NoSQL database is a non-relational database system that allows
+> flexible data models and is designed to handle large volumes of
+> structured, semi-structured, or unstructured data.
+
+------------------------------------------------------------------------
+
+## Example of NoSQL Data (JSON Document)
+
+``` json
+{
+ "name": "Durgesh",
+ "course": "BCA",
+ "age": 20
+}
+```
+
+------------------------------------------------------------------------
+
+## Popular NoSQL Databases
+
+-   MongoDB
+-   Redis
+-   Apache Cassandra
+-   Firebase
+
+------------------------------------------------------------------------
+
+## Types of NoSQL Databases
+
+### Document Database
+
+``` json
+{
+ "studentId": 1,
+ "name": "Durgesh",
+ "course": "BCA"
+}
+```
+
+Examples: - MongoDB - CouchDB
+
+------------------------------------------------------------------------
+
+### Key-Value Database
+
+    name : Durgesh
+    course : BCA
+    age : 20
+
+Examples: - Redis - DynamoDB
+
+------------------------------------------------------------------------
+
+### Graph Database
+
+Durgesh → Friend → Rahul\
+Rahul → Friend → Priya
+
+Example system: - Neo4j
+
+------------------------------------------------------------------------
+
+### Column Database
+
+Examples: - Cassandra - HBase
+
+------------------------------------------------------------------------
+
+## Advantages of NoSQL Databases
+
+-   Flexible Schema
+-   High Scalability
+-   High Performance
+-   Handles Unstructured Data
+
+------------------------------------------------------------------------
+
+## Disadvantages of NoSQL Databases
+
+-   Weak data relationships
+-   No standard query language
+-   Possible consistency issues
+
+------------------------------------------------------------------------
+
+# SQL vs NoSQL Comparison
+
+  Feature          SQL Database      NoSQL Database
+  ---------------- ----------------- -----------------------
+  Data Structure   Tables            Documents / Key-Value
+  Schema           Fixed             Flexible
+  Relationships    Strong            Weak
+  Query Language   SQL               Different APIs
+  Scalability      Vertical          Horizontal
+  Best For         Structured Data   Big Data
+
+------------------------------------------------------------------------
+
+# Real World Example
+
+## Banking System
+
+Banks use **SQL databases** because they require: - Strong data
+consistency - Reliable transactions
+
+## Social Media Platforms
+
+Social media platforms often use **NoSQL databases** because they
+handle: - Huge amounts of data - Flexible data structures
+
+------------------------------------------------------------------------
+
+# Simple Analogy
+
+SQL Database → Excel sheet with fixed columns.
+
+NoSQL Database → JSON documents where structure can change.
+
  
+------------------------------------------------------------------------
+
+ 
+
+# Introduction to SQL (Structured Query Language)
+
+## What is SQL?
+
+**SQL (Structured Query Language)** is a standard programming language
+used to communicate with relational databases. It is used to create,
+manage, manipulate, and retrieve data stored in database tables.
+
+In simple terms:
+
+> SQL is the language used to interact with databases.
+
+Using SQL, users can perform operations such as:
+
+-   Creating databases
+-   Creating tables
+-   Inserting data
+-   Updating data
+-   Deleting data
+-   Retrieving data
+
+SQL works with Relational Database Management Systems (RDBMS) such as:
+
+-   MySQL
+-   Microsoft SQL Server
+-   Oracle Database
+-   PostgreSQL
+
+------------------------------------------------------------------------
+
+# Why SQL is Important
+
+SQL is important because almost every modern application uses databases.
+
+Examples:
+
+## Banking System
+
+SQL is used to: - Check account balance - Transfer money - Store
+transaction records
+
+## E‑Commerce Websites
+
+SQL manages: - Products - Customers - Orders - Payments
+
+## Social Media Platforms
+
+SQL manages: - User accounts - Posts - Comments - Likes
+
+## College Management Systems
+
+SQL manages: - Student records - Course information - Fees - Attendance
+
+------------------------------------------------------------------------
+
+# Characteristics of SQL
+
+## 1. Simple Language
+
+SQL has a simple and readable syntax.
+
+``` sql
+SELECT * FROM Students;
+```
+
+## 2. Standard Language
+
+SQL is an international standard used by most database systems.
+
+## 3. Powerful Data Retrieval
+
+SQL allows complex queries to retrieve specific information.
+
+## 4. Data Integrity
+
+SQL helps maintain consistency and accuracy of data.
+
+------------------------------------------------------------------------
+
+# Types of SQL Commands
+
+SQL commands are divided into five categories:
+
+1.  DDL (Data Definition Language)
+2.  DML (Data Manipulation Language)
+3.  DQL (Data Query Language)
+4.  DCL (Data Control Language)
+5.  TCL (Transaction Control Language)
+
+------------------------------------------------------------------------
+
+# 1. DDL -- Data Definition Language
+
+DDL commands define and manage database structure.
+
+Common commands:
+
+-   CREATE
+-   ALTER
+-   DROP
+-   TRUNCATE
+
+## CREATE Command
+
+``` sql
+CREATE TABLE Students (
+    StudentID INT,
+    Name VARCHAR(50),
+    Course VARCHAR(50),
+    Age INT
+);
+```
+
+## ALTER Command
+
+``` sql
+ALTER TABLE Students
+ADD Email VARCHAR(100);
+```
+
+## DROP Command
+
+``` sql
+DROP TABLE Students;
+```
+
+## TRUNCATE Command
+
+``` sql
+TRUNCATE TABLE Students;
+```
+
+------------------------------------------------------------------------
+
+# 2. DML -- Data Manipulation Language
+
+DML commands manipulate data inside tables.
+
+Commands:
+
+-   INSERT
+-   UPDATE
+-   DELETE
+
+## INSERT Command
+
+``` sql
+INSERT INTO Students (StudentID, Name, Course, Age)
+VALUES (1, 'Durgesh', 'BCA', 20);
+```
+
+Insert multiple rows:
+
+``` sql
+INSERT INTO Students VALUES
+(2,'Rahul','BBA',21),
+(3,'Priya','MCA',22);
+```
+
+## UPDATE Command
+
+``` sql
+UPDATE Students
+SET Age = 21
+WHERE StudentID = 1;
+```
+
+## DELETE Command
+
+``` sql
+DELETE FROM Students
+WHERE StudentID = 2;
+```
+
+------------------------------------------------------------------------
+
+# 3. DQL -- Data Query Language
+
+DQL retrieves data from tables.
+
+Main command:
+
+-   SELECT
+
+## SELECT Example
+
+``` sql
+SELECT * FROM Students;
+```
+
+Select specific columns:
+
+``` sql
+SELECT Name, Course
+FROM Students;
+```
+
+Using WHERE condition:
+
+``` sql
+SELECT * FROM Students
+WHERE Course = 'BCA';
+```
+
+------------------------------------------------------------------------
+
+# 4. DCL -- Data Control Language
+
+DCL controls access permissions.
+
+Commands:
+
+-   GRANT
+-   REVOKE
+
+Example:
+
+``` sql
+GRANT SELECT ON Students TO User1;
+```
+
+------------------------------------------------------------------------
+
+# 5. TCL -- Transaction Control Language
+
+TCL manages transactions.
+
+Commands:
+
+-   COMMIT
+-   ROLLBACK
+-   SAVEPOINT
+
+Example:
+
+``` sql
+COMMIT;
+```
+
+------------------------------------------------------------------------
+
+# Basic SQL Example
+
+## Step 1 -- Create Table
+
+``` sql
+CREATE TABLE Students (
+    ID INT,
+    Name VARCHAR(50),
+    Course VARCHAR(50)
+);
+```
+
+## Step 2 -- Insert Data
+
+``` sql
+INSERT INTO Students VALUES (1,'Durgesh','BCA');
+INSERT INTO Students VALUES (2,'Rahul','BBA');
+INSERT INTO Students VALUES (3,'Priya','MCA');
+```
+
+## Step 3 -- Retrieve Data
+
+``` sql
+SELECT * FROM Students;
+```
+
+Result:
+
+  ID   Name      Course
+  ---- --------- --------
+  1    Durgesh   BCA
+  2    Rahul     BBA
+  3    Priya     MCA
+
+------------------------------------------------------------------------
+
+# Advantages of SQL
+
+-   Easy to learn
+-   High performance
+-   Standardized language
+-   Data security
+
+------------------------------------------------------------------------
+
  
