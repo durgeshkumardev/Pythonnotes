@@ -866,4 +866,177 @@ Result:
 
 ------------------------------------------------------------------------
 
- 
+ ### Database Data Types and Constraints
+
+# 1. What is a Data Type?
+
+Definition:
+> A Data Type specifies the type of data that can be stored in a column of a table.
+
+It tells the database whether the column will store:
+
+- Numbers
+
+- Text
+
+- Dates
+
+- Boolean values
+
+- Binary data
+
+```
+CREATE TABLE Student
+(
+    Id INT,
+    Name VARCHAR(50),
+    Age INT,
+    DOB DATE
+);
+```
+# Explanation
+
+| Column | Data Type | Description            |
+| ------ | --------- | ---------------------- |
+| Id     | INT       | Stores integer numbers |
+| Name   | VARCHAR   | Stores text            |
+| Age    | INT       | Stores numbers         |
+| DOB    | DATE      | Stores date values     |
+
+
+# 1. Numeric Data Types
+
+- Numeric data types are used to store numbers.
+
+| Data Type | Description                        | Example |
+| --------- | ---------------------------------- | ------- |
+| INT       | Stores integer numbers             | 10      |
+| BIGINT    | Stores very large integers         | 100000  |
+| SMALLINT  | Stores small integers              | 200     |
+| TINYINT   | Stores values from 0 to 255        | 50      |
+| DECIMAL   | Stores exact decimal numbers       | 10.25   |
+| FLOAT     | Stores approximate decimal numbers | 15.23   |
+
+
+# 2. Character (String) Data Types
+
+- Character data types are used to store text or string values.
+
+| Data Type    | Description                    |
+| ------------ | ------------------------------ |
+| CHAR(n)      | Fixed-length string            |
+| VARCHAR(n)   | Variable-length string         |
+| VARCHAR(MAX) | Large text data                |
+| NCHAR(n)     | Unicode fixed-length string    |
+| NVARCHAR(n)  | Unicode variable-length string |
+
+
+# 3. Date and Time Data Types
+
+These data types are used to store date and time values.
+
+| Data Type | Description                       |
+| --------- | --------------------------------- |
+| DATE      | Stores only date                  |
+| TIME      | Stores only time                  |
+| DATETIME  | Stores both date and time         |
+| DATETIME2 | More accurate version of DATETIME |
+
+# 4. Boolean Data Type
+- SQL Server does not have a direct Boolean type. Instead it uses BIT.
+| Value | Meaning |
+| ----- | ------- |
+| 0     | False   |
+| 1     | True    |
+
+
+### 2. What is a Constraint?
+Definition:
+> A Constraint is a rule applied to a column to control the type of data that can be inserted.
+> Constraints help maintain data accuracy and integrity in the database.
+
+- Example
+```
+Name VARCHAR(50) NOT NULL
+```
+- This means the Name column cannot contain NULL values.
+
+
+### Types of Constraints in SQL Server
+# 1. Primary Key
+- A Primary Key uniquely identifies each record in a table.
+Rules
+
+- Values must be unique
+
+- NULL values are not allowed
+
+- Each table can have only one primary key
+
+Example
+```
+CREATE TABLE Student
+(
+    Id INT PRIMARY KEY,
+    Name VARCHAR(50)
+);
+```
+
+# 2. NOT NULL Constraint
+- The NOT NULL constraint ensures that a column cannot store NULL values.
+
+Example
+```
+Name VARCHAR(100) NOT NULL
+```
+# 3. UNIQUE Constraint
+
+- The UNIQUE constraint ensures that all values in a column are different.
+# Example
+```
+Email VARCHAR(100) UNIQUE
+```
+
+# 4. FOREIGN KEY
+
+- A Foreign Key creates a relationship between two tables.
+
+> It references the Primary Key of another table.
+
+# Example
+```
+CREATE TABLE Orders
+(
+   OrderId INT PRIMARY KEY,
+   UserId INT,
+   FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
+```
+
+# 5. CHECK Constraint
+
+- The CHECK constraint ensures that values meet a specific condition.
+
+```
+Age INT CHECK (Age >= 18)
+```
+
+# 6. DEFAULT Constraint
+- The DEFAULT constraint assigns a default value when no value is provided.
+
+```
+IsActive BIT DEFAULT 1
+```
+
+```
+CREATE TABLE Student
+(
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    Age INT CHECK (Age >= 18),
+    IsActive BIT DEFAULT 1,
+    CreatedDate DATETIME DEFAULT GETDATE()
+);
+```
+
