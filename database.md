@@ -1040,3 +1040,248 @@ CREATE TABLE Student
 );
 ```
 
+
+
+
+
+
+## 🔷 What are Constraints?
+
+Constraints are **rules applied on table columns** to ensure that only **valid and correct data** is inserted into the database.
+
+👉 Simple Definition:
+
+> Constraints are rules that keep data accurate, safe, and consistent.
+
+---
+
+## 🎯 Why Constraints are Important?
+
+* Prevent invalid data ❌
+* Avoid duplicate entries ❌
+* Maintain data integrity ✅
+* Improve database reliability ✅
+
+---
+
+## 🔑 Types of Constraints in MySQL
+
+1. NOT NULL
+2. UNIQUE
+3. PRIMARY KEY
+4. FOREIGN KEY
+5. DEFAULT
+6. CHECK
+
+---
+
+# 🔷 1. NOT NULL Constraint
+
+👉 Ensures a column cannot have NULL (empty) value.
+
+```sql
+CREATE TABLE students (
+    id INT,
+    name VARCHAR(100) NOT NULL
+);
+```
+
+❌ Invalid:
+
+```sql
+INSERT INTO students (id) VALUES (1);
+```
+
+---
+
+# 🔷 2. UNIQUE Constraint
+
+👉 Prevents duplicate values in a column.
+
+```sql
+CREATE TABLE users (
+    id INT,
+    email VARCHAR(100) UNIQUE
+);
+```
+
+❌ Invalid:
+
+```sql
+INSERT INTO users VALUES (1, 'test@gmail.com');
+INSERT INTO users VALUES (2, 'test@gmail.com');
+```
+
+---
+
+# 🔷 3. PRIMARY KEY
+
+👉 Combination of:
+
+* NOT NULL
+* UNIQUE
+
+👉 Used to uniquely identify each record.
+
+```sql
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+```
+
+✔ No duplicate
+✔ No NULL
+
+---
+
+# 🔷 4. FOREIGN KEY
+
+👉 Creates relationship between two tables.
+
+```sql
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(100)
+);
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+```
+
+❌ Invalid:
+
+```sql
+INSERT INTO employees VALUES (1, 'Ram', 10);
+```
+
+---
+
+# 🔷 5. DEFAULT Constraint
+
+👉 Sets a default value if none is provided.
+
+```sql
+CREATE TABLE orders (
+    id INT,
+    status VARCHAR(50) DEFAULT 'PENDING'
+);
+```
+
+✔ Example:
+
+```sql
+INSERT INTO orders (id) VALUES (1);
+```
+
+👉 Output:
+
+```
+status = 'PENDING'
+```
+
+---
+
+# 🔷 6. CHECK Constraint
+
+👉 Adds a condition to restrict values.
+
+```sql
+CREATE TABLE students (
+    id INT,
+    age INT CHECK (age >= 18)
+);
+```
+
+❌ Invalid:
+
+```sql
+INSERT INTO students VALUES (1, 15);
+```
+
+---
+
+# 🧱 Combined Example (Best Practice)
+
+```sql
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    age INT CHECK (age >= 18),
+    status VARCHAR(50) DEFAULT 'ACTIVE'
+);
+```
+
+---
+
+# ✅ Valid Insert Example
+
+```sql
+INSERT INTO users (user_id, name, email, age)
+VALUES (1, 'Durgesh', 'durgesh@gmail.com', 22);
+```
+
+---
+
+# ❌ Invalid Insert Examples
+
+```sql
+-- NULL name
+INSERT INTO users (user_id, email, age)
+VALUES (2, 'test@gmail.com', 25);
+
+-- Duplicate email
+INSERT INTO users VALUES (3, 'Ram', 'durgesh@gmail.com', 20, 'ACTIVE');
+
+-- Age less than 18
+INSERT INTO users VALUES (4, 'Shyam', 's@gmail.com', 15, 'ACTIVE');
+```
+
+---
+
+# 🧑‍🏫 Teaching Tips
+
+Ask students:
+
+* Can two users have same ID? → ❌ NO → PRIMARY KEY
+* Can email be repeated? → ❌ NO → UNIQUE
+* Can age be invalid? → ❌ NO → CHECK
+
+---
+
+# 🔥 Summary Table
+
+| Constraint  | Description         |
+| ----------- | ------------------- |
+| NOT NULL    | Cannot be empty     |
+| UNIQUE      | No duplicate values |
+| PRIMARY KEY | Unique + Not Null   |
+| FOREIGN KEY | Connects tables     |
+| DEFAULT     | Auto value          |
+| CHECK       | Condition rule      |
+
+---
+
+# 🚀 Real-Life Examples
+
+* Aadhaar Number → PRIMARY KEY
+* Email → UNIQUE
+* Order Status → DEFAULT
+* Age Validation → CHECK
+* Department Relation → FOREIGN KEY
+
+---
+
+## 📌 Conclusion
+
+Constraints help maintain **data integrity**, **accuracy**, and **consistency** in a database.
+They are essential for building **reliable applications**.
+
+---
+
+
