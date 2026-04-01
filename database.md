@@ -1285,3 +1285,64 @@ They are essential for building **reliable applications**.
 ---
 
 
+
+---
+```
+CREATE TABLE Students (
+    StudentId INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT,
+    Gender VARCHAR(10),
+    Class VARCHAR(10),
+    City VARCHAR(50),
+    Marks INT,
+    Attendance INT,
+    AdmissionDate DATE
+);
+
+```
+
+
+```
+INSERT INTO Students VALUES
+(1, 'Amit Sharma', 16, 'Male', '10th', 'Lucknow', 78, 85, '2023-04-01'),
+(2, 'Priya Singh', 15, 'Female', '9th', 'Kanpur', 88, 90, '2023-04-05'),
+(3, 'Rahul Verma', 17, 'Male', '11th', 'Delhi', 67, 70, '2023-03-20'),
+(4, 'Sneha Gupta', 16, 'Female', '10th', 'Lucknow', 92, 95, '2023-04-10'),
+(5, 'Arjun Yadav', 18, 'Male', '12th', 'Varanasi', 55, 60, '2023-02-15'),
+(6, 'Neha Mishra', 15, 'Female', '9th', 'Lucknow', 73, 80, '2023-03-25'),
+(7, 'Rohit Kumar', 17, 'Male', '11th', 'Kanpur', 81, 75, '2023-04-12'),
+(8, 'Pooja Singh', 16, 'Female', '10th', 'Delhi', 69, 82, '2023-04-08'),
+(9, 'Vikas Patel', 18, 'Male', '12th', 'Lucknow', 45, 50, '2023-01-20'),
+(10, 'Anjali Tiwari', 17, 'Female', '11th', 'Varanasi', 85, 88, '2023-02-28'),
+(11, 'Karan Mehta', 16, 'Male', '10th', 'Delhi', 77, 92, '2023-03-15'),
+(12, 'Simran Kaur', 15, 'Female', '9th', 'Kanpur', 91, 94, '2023-04-02'),
+(13, 'Deepak Chauhan', 18, 'Male', '12th', 'Lucknow', 62, 65, '2023-02-10'),
+(14, 'Riya Sharma', 17, 'Female', '11th', 'Delhi', 89, 91, '2023-03-18'),
+(15, 'Manish Singh', 16, 'Male', '10th', 'Varanasi', 58, 72, '2023-04-07'),
+(16, 'Kavita Yadav', 15, 'Female', '9th', 'Lucknow', 66, 78, '2023-04-11'),
+(17, 'Suresh Patel', 18, 'Male', '12th', 'Kanpur', 72, 68, '2023-01-30'),
+(18, 'Meena Gupta', 17, 'Female', '11th', 'Lucknow', 95, 96, '2023-03-22'),
+(19, 'Ajay Verma', 16, 'Male', '10th', 'Delhi', 49, 55, '2023-04-03'),
+(20, 'Nisha Singh', 15, 'Female', '9th', 'Varanasi', 83, 87, '2023-04-09');
+```
+
+Basic Conditions
+Show students whose marks are greater than 80
+Show students whose age is less than 16
+Show students from Lucknow
+Show female students
+Show students in class '10th'
+🔹 AND / OR Conditions
+Students from Lucknow AND marks > 70
+Students from Delhi OR Kanpur
+Students with marks > 80 AND attendance > 90
+Male students in class 12th
+Female students with marks < 70
+
+
+
+
+
+
+
