@@ -1341,6 +1341,87 @@ Male students in class 12th
 Female students with marks < 70
 
 
+----
+
+
+# Difference Between WHERE and HAVING
+
+- 1. WHERE Clause
+Used to filter rows BEFORE grouping
+
+Works on individual rows
+Cannot use aggregation functions directly (like AVG, SUM)
+
+```
+SELECT * 
+FROM Employees
+WHERE Salary > 50000;
+```
+- First filters rows → then result is shown
+
+# 2. HAVING Clause
+Used to filter AFTER GROUP BY
+
+Works on grouped data
+Used with aggregation functions
+
+```
+SELECT Department, AVG(Salary)
+FROM Employees
+GROUP BY Department
+HAVING AVG(Salary) > 60000;
+```
+# Key Difference 
+
+| Feature                    | WHERE       | HAVING              |
+| -------------------------- | ----------- | ------------------- |
+| Works on                   | Rows        | Groups              |
+| Used before/after GROUP BY | Before      | After               |
+| Aggregation allowed?       | ❌ No        | ✅ Yes               |
+| Purpose                    | Filter data | Filter grouped data |
+
+
+# Simple Understanding
+Think like this:
+
+WHERE = filter raw data
+HAVING = filter summary data
+
+# Real Example
+Wrong Query
+```
+SELECT Department, AVG(Salary)
+FROM Employees
+WHERE AVG(Salary) > 60000
+GROUP BY Department;
+
+```
+
+# Correct Query
+```
+SELECT Department, AVG(Salary)
+FROM Employees
+GROUP BY Department
+HAVING AVG(Salary) > 60000;
+```
+# Example 2 (Wrong )
+```
+SELECT Department, City, AVG(Salary)
+FROM Employees
+GROUP BY Department;
+```
+# Example 3 (Correct Fix )
+```
+SELECT Department, City, AVG(Salary)
+FROM Employees
+GROUP BY Department, City;
+```
+
+
+
+
+
+
 
 
 
