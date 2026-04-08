@@ -1419,6 +1419,94 @@ GROUP BY Department, City;
 
 
 
+# Students Table
+| StudentID | Name  | ClassID |
+| --------- | ----- | ------- |
+| 1         | Ravi  | 101     |
+| 2         | Priya | 102     |
+| 3         | Amit  | 101     |
+| 4         | Neha  | NULL    |
+
+# Classes Table
+| ClassID | ClassName |
+| ------- | --------- |
+| 101     | Science   |
+| 102     | Commerce  |
+| 103     | Arts      |
+
+----
+# Marks Table
+| MarkID | StudentID | Marks |
+| ------ | --------- | ----- |
+| 1      | 1         | 85    |
+| 2      | 2         | 90    |
+| 3      | 3         | 78    |
+| 4      | 5         | 88    |
+
+1. INNER JOIN
+- Only shows matching data in both tables
+```
+SELECT s.Name, c.ClassName
+FROM Students s
+INNER JOIN Classes c 
+ON s.ClassID = c.ClassID;
+```
+# Output:
+| Name  | ClassName |
+| ----- | --------- |
+| Ravi  | Science   |
+| Priya | Commerce  |
+| Amit  | Science   |
+
+# Neha is NOT shown because ClassID is NULL
+
+# 2. LEFT JOIN
+- Shows all students, even if no class exists
+```
+SELECT s.Name, c.ClassName
+FROM Students s
+LEFT JOIN Classes c 
+ON s.ClassID = c.ClassID;
+```
+# Output:
+| Name  | ClassName |
+| ----- | --------- |
+| Ravi  | Science   |
+| Priya | Commerce  |
+| Amit  | Science   |
+| Neha  | NULL      |
+
+# LEFT = “All from LEFT table (Students)”
+---
+# 3. RIGHT JOIN
+- Shows all classes, even if no student
+```
+SELECT s.Name, c.ClassName
+FROM Students s
+RIGHT JOIN Classes c 
+ON s.ClassID = c.ClassID;
+```
+Output:
+| Name  | ClassName |
+| ----- | --------- |
+| Ravi  | Science   |
+| Amit  | Science   |
+| Priya | Commerce  |
+| NULL  | Arts      |
+
+# Arts has no student → shows NULL
+
+---
+
+# 4. FULL JOIN (Important Concept )
+
+- MySQL does NOT support FULL JOIN directly
+
+
+
+
+
+
 
 
 
