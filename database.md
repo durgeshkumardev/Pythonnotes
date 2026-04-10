@@ -1504,6 +1504,200 @@ Output:
 
 
 
+---
+
+# 📘 MySQL Functions & Stored Procedures (Complete Guide)
+
+## 📌 Introduction
+
+This guide covers:
+- Functions in MySQL
+- Stored Procedures
+- Difference between Function & Procedure
+- CRUD operations using Stored Procedures
+
+---
+
+# 🔍 What is a Function?
+
+A **Function** is a reusable SQL block that:
+- Accepts input (parameters)
+- Performs calculation
+- Returns **one value**
+
+### ✅ Examples:
+- Calculate bonus
+- Calculate GST
+- Format full name
+
+---
+
+# 🔍 What is a Stored Procedure?
+
+A **Stored Procedure** is a collection of SQL statements used to:
+- Perform operations (CRUD)
+- Handle business logic
+- Work with multiple queries
+
+---
+
+# ⚖️ Function vs Stored Procedure
+
+| Feature | Function | Stored Procedure |
+|--------|---------|------------------|
+| Return Value | Must return 1 value | Optional |
+| Use in SELECT | Yes | No |
+| Purpose | Calculation | Operations |
+| Call Method | SELECT | CALL |
+| CRUD Operations | No | Yes |
+
+---
+
+# 🧱 Step 1: Create Database
+
+```sql
+CREATE DATABASE SchoolDB;
+USE SchoolDB;
+```
+# Create Table
+```
+CREATE TABLE Students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    marks INT,
+    city VARCHAR(50)
+);
+```
+# Insert Sample Data
+```
+INSERT INTO Students (name, marks, city) VALUES
+('Rahul', 80, 'Delhi'),
+('Amit', 70, 'Mumbai'),
+('Neha', 90, 'Pune');
+```
+# Create Function
+# Example: Grade Function
+
+
+```
+DELIMITER 
+
+CREATE FUNCTION GetGrade(marks INT)
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    DECLARE grade VARCHAR(10);
+
+    IF marks >= 90 THEN
+        SET grade = 'A';
+    ELSEIF marks >= 75 THEN
+        SET grade = 'B';
+    ELSE
+        SET grade = 'C';
+    END IF;
+
+    RETURN grade;
+END //
+
+DELIMITER ;
+```
+
+# Use Function
+
+```
+SELECT name, marks, GetGrade(marks) AS Grade
+FROM Students;
+```
+
+---
+
+# Stored Procedure
+
+```
+DELIMITER //
+
+CREATE PROCEDURE GetStudents()
+BEGIN
+    SELECT * FROM Students;
+END //
+
+DELIMITER ;
+```
+
+# Call Procedure
+```
+CALL GetStudents();
+```
+# 1 INSERT
+```
+DELIMITER //
+
+CREATE PROCEDURE AddStudent(
+    IN s_name VARCHAR(100),
+    IN s_marks INT,
+    IN s_city VARCHAR(50)
+)
+BEGIN
+    INSERT INTO Students(name, marks, city)
+    VALUES (s_name, s_marks, s_city);
+END //
+
+DELIMITER ;
+```
+
+# 2. SELECT
+
+```
+DELIMITER //
+
+CREATE PROCEDURE GetAllStudents()
+BEGIN
+    SELECT * FROM Students;
+END //
+
+DELIMITER ;
+```
+# CALL GetAllStudents();
+
+
+# 3 UPDATE
+
+```
+DELIMITER //
+
+CREATE PROCEDURE UpdateStudent(
+    IN s_id INT,
+    IN s_name VARCHAR(100),
+    IN s_marks INT,
+    IN s_city VARCHAR(50)
+)
+BEGIN
+    UPDATE Students
+    SET name = s_name,
+        marks = s_marks,
+        city = s_city
+    WHERE id = s_id;
+END //
+
+DELIMITER ;
+```
+# CALL UpdateStudent(1, 'Rahul Sharma', 88, 'Delhi');
+
+# 4. DELETE
+```
+DELIMITER //
+
+CREATE PROCEDURE DeleteStudent(IN s_id INT)
+BEGIN
+    DELETE FROM Students
+    WHERE id = s_id;
+END //
+
+DELIMITER ;
+```
+
+
+
 
 
 
