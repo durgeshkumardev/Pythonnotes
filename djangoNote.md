@@ -979,4 +979,10 @@ After mastering the basics, explore these topics:
 
 ---
 
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
  
