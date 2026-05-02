@@ -986,3 +986,44 @@ STATICFILES_DIRS = [
 ]
 
  
+
+ # 🚀 Django + MySQL Setup Guide
+
+This guide explains how to connect a Django project with a MySQL database step by step.
+
+---
+
+## 📌 Prerequisites
+
+Make sure you have installed:
+
+- Python (3.x)
+- Django
+- MySQL Server
+
+---
+
+## 🛠 1. Install Required Packages
+
+### Install MySQL driver
+
+```bash
+pip install mysqlclient
+```
+---
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'student_db',
+        'USER': 'root',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+```
+
+
+python manage.py makemigrations
+python manage.py migrate
