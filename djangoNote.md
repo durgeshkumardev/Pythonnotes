@@ -1027,3 +1027,992 @@ DATABASES = {
 
 python manage.py makemigrations
 python manage.py migrate
+
+
+
+
+---
+
+# Session and Cookie in Web Development
+
+HTTP is a **stateless protocol**, which means the server does not remember previous requests automatically.
+
+To remember user information, websites use:
+
+1. Sessions
+2. Cookies
+
+---
+
+# What is a Cookie?
+
+A **cookie** is a small piece of data stored in the **user's browser** by the website.
+
+The browser automatically sends the cookie back to the server with every request.
+
+---
+
+# How Cookies Work
+
+## Step 1
+User visits a website.
+
+## Step 2
+Server sends a cookie to the browser.
+
+Example:
+
+```http
+Set-Cookie: username=durgesh
+```
+
+## Step 3
+Browser stores the cookie.
+
+## Step 4
+Browser sends the cookie back with future requests.
+
+```http
+Cookie: username=durgesh
+```
+
+---
+
+# Real-Life Example of Cookie
+
+Suppose a user logs into a shopping website.
+
+The website stores:
+
+```text
+user_id = 101
+```
+
+inside the browser cookie.
+
+Next time the user opens the website, the browser sends:
+
+```text
+user_id = 101
+```
+
+and the website remembers the user.
+
+---
+
+# Types of Cookies
+
+## 1. Session Cookie
+
+- Temporary cookie
+- Deleted when the browser closes
+- Used for login sessions
+
+---
+
+## 2. Persistent Cookie
+
+- Stored for a long time
+- Used for:
+  - Remember me
+  - Language settings
+  - Theme settings
+
+---
+
+# Advantages of Cookies
+
+- Simple
+- Fast
+- Stores small data
+- Helps remember users
+
+---
+
+# Disadvantages of Cookies
+
+- Less secure
+- User can modify cookies
+- Limited storage size (~4KB)
+
+---
+
+# JavaScript Cookie Example
+
+## Set Cookie
+
+```javascript
+document.cookie = "username=Durgesh";
+```
+
+## Read Cookie
+
+```javascript
+console.log(document.cookie);
+```
+
+---
+
+# Django Cookie Example
+
+## Set Cookie
+
+```python
+from django.http import HttpResponse
+
+def set_cookie(request):
+    response = HttpResponse("Cookie Set")
+    response.set_cookie('username', 'Durgesh')
+    return response
+```
+
+## Get Cookie
+
+```python
+from django.http import HttpResponse
+
+def get_cookie(request):
+    username = request.COOKIES.get('username')
+    return HttpResponse(username)
+```
+
+---
+
+# What is a Session?
+
+A **session** stores user data on the **server side**.
+
+The browser stores only a small **session ID**.
+
+The actual data remains secure on the server.
+
+---
+
+# How Sessions Work
+
+## Step 1
+User logs in.
+
+## Step 2
+Server creates a session.
+
+Example:
+
+```text
+Session ID = ABC123
+```
+
+## Step 3
+Server stores user data.
+
+```text
+ABC123 → user_id = 101
+```
+
+## Step 4
+Browser receives only the session ID.
+
+```text
+sessionid=ABC123
+```
+
+## Step 5
+Browser sends the session ID with every request.
+
+## Step 6
+Server checks the session ID and identifies the user.
+
+---
+
+# Real-Life Example of Session
+
+Imagine a hotel token system.
+
+## Cookie
+
+Like carrying your own room information in your pocket.
+
+## Session
+
+Hotel stores your information safely and gives you only a token number.
+
+---
+
+# Advantages of Sessions
+
+- More secure
+- Stores large data
+- Sensitive data remains on server
+
+---
+
+# Disadvantages of Sessions
+
+- Uses server memory
+- Slightly slower than cookies
+
+---
+
+# Django Session Example
+
+## Store Session
+
+```python
+from django.http import HttpResponse
+
+def set_session(request):
+    request.session['username'] = 'Durgesh'
+    return HttpResponse("Session Set")
+```
+
+## Get Session
+
+```python
+from django.http import HttpResponse
+
+def get_session(request):
+    username = request.session.get('username')
+    return HttpResponse(username)
+```
+
+---
+
+# Difference Between Session and Cookie
+
+| Feature | Cookie | Session |
+|----------|----------|----------|
+| Storage Location | Browser | Server |
+| Security | Less Secure | More Secure |
+| Data Size | Small | Large |
+| Speed | Faster | Slightly Slower |
+| Data Stored | Actual Data | Session ID |
+| User Can Modify? | Yes | No |
+| Lifetime | Can be Long-Term | Usually Temporary |
+| Main Usage | Remember Settings | Authentication/Login |
+
+---
+
+# Simple Understanding
+
+## Cookie
+
+Browser stores actual data.
+
+Example:
+
+```text
+theme=dark
+username=Durgesh
+```
+
+---
+
+## Session
+
+Browser stores only the session ID.
+
+Example:
+
+```text
+sessionid=ABC123
+```
+
+Actual data:
+
+```text
+ABC123 → username=Durgesh
+```
+
+stored on the server.
+
+---
+
+# Which One Should Be Used?
+
+## Use Cookies For
+
+- Theme settings
+- Language preferences
+- Remember me
+- Small non-sensitive data
+
+---
+
+## Use Sessions For
+
+- Login systems
+- Authentication
+- Banking websites
+- Sensitive data
+
+---
+
+# Django Authentication and Sessions
+
+Django mainly uses **sessions** for authentication.
+
+Example:
+
+```python
+from django.contrib.auth import login
+
+login(request, user)
+```
+
+When the user logs in:
+
+- Django creates a session
+- Browser receives a `sessionid` cookie
+- Server stores the actual user information
+
+---
+
+# Important Point
+
+## Session Also Uses Cookies
+
+Sessions and cookies work together.
+
+- Session data → stored on server
+- Session ID → stored inside browser cookie
+
+So sessions usually depend on cookies.
+
+---
+
+# Complete Login Flow
+
+## Step 1
+User enters username and password.
+
+## Step 2
+Server verifies user credentials.
+
+## Step 3
+Server creates a session.
+
+```text
+sessionid = XYZ123
+```
+
+## Step 4
+Browser stores the session ID in a cookie.
+
+## Step 5
+Browser sends the session ID with every request.
+
+## Step 6
+Server identifies the logged-in user.
+
+---
+
+# Final Summary
+
+## Cookie
+
+- Stored in browser
+- Less secure
+- Faster
+- Stores small data
+
+## Session
+
+- Stored on server
+- More secure
+- Used for authentication
+- Browser stores only session ID
+
+
+---
+
+# Authentication and Authorization in Web Development
+
+In web development, especially in Django, two important security concepts are:
+
+1. Authentication
+2. Authorization
+
+Many beginners get confused between them.
+
+---
+
+# Simple Difference
+
+| Term | Meaning |
+|------|----------|
+| Authentication | Who are you? |
+| Authorization | What can you access? |
+
+---
+
+# Real-Life Example
+
+Imagine a company office.
+
+## Authentication
+
+The security guard checks:
+
+- ID card
+- Username
+- Password
+
+This verifies:
+
+```text
+Are you really Durgesh?
+```
+
+This is called **Authentication**.
+
+---
+
+## Authorization
+
+After entering the office:
+
+- Employee room access ✅
+- Admin room access ❌
+
+This checks:
+
+```text
+What are you allowed to access?
+```
+
+This is called **Authorization**.
+
+---
+
+# What is Authentication?
+
+Authentication is the process of:
+
+> Verifying the identity of a user.
+
+The system checks whether the user is genuine or not.
+
+---
+
+# Authentication Examples
+
+- Username and password login
+- Email and password login
+- OTP login
+- Google login
+- Fingerprint login
+- Face unlock
+
+---
+
+# Authentication Process
+
+## Step 1
+
+User enters:
+
+```text
+Username + Password
+```
+
+---
+
+## Step 2
+
+Server checks the database.
+
+Example:
+
+```text
+Username = durgesh
+Password = 123
+```
+
+---
+
+## Step 3
+
+If credentials are correct:
+
+```text
+User Authenticated Successfully
+```
+
+Else:
+
+```text
+Invalid Credentials
+```
+
+---
+
+# Authentication in Django
+
+Django provides a built-in authentication system.
+
+Main module:
+
+```python
+django.contrib.auth
+```
+
+---
+
+# Django Authentication Functions
+
+| Function | Purpose |
+|----------|----------|
+| authenticate() | Verify username and password |
+| login() | Login user |
+| logout() | Logout user |
+
+---
+
+# Django Authentication Example
+
+## Login View
+
+```python
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+
+    if request.method == 'POST':
+
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            login(request, user)
+            return redirect('dashboard')
+
+        else:
+            return render(request, 'login.html', {
+                'error': 'Invalid Username or Password'
+            })
+
+    return render(request, 'login.html')
+```
+
+---
+
+# How authenticate() Works
+
+```python
+user = authenticate(
+    username=username,
+    password=password
+)
+```
+
+Django checks:
+
+- Username exists or not
+- Password correct or not
+
+If valid:
+
+```text
+<User Object>
+```
+
+Else:
+
+```text
+None
+```
+
+---
+
+# How login() Works
+
+```python
+login(request, user)
+```
+
+Django:
+
+- Creates session
+- Stores session ID
+- User becomes logged in
+
+---
+
+# Check Logged-In User
+
+```python
+if request.user.is_authenticated:
+    print("User Logged In")
+```
+
+---
+
+# Logout User
+
+```python
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+```
+
+---
+
+# Authentication Flow
+
+```text
+User Login
+    ↓
+authenticate()
+    ↓
+Valid User?
+    ↓
+login()
+    ↓
+Session Created
+    ↓
+User Logged In
+```
+
+---
+
+# What is Authorization?
+
+Authorization means:
+
+> Checking user permissions and access rights.
+
+After authentication, the system decides:
+
+- What the user can access
+- What the user cannot access
+
+---
+
+# Authorization Examples
+
+| User Type | Access |
+|-----------|---------|
+| Student | View Courses |
+| Teacher | Add Marks |
+| Admin | Full Access |
+
+---
+
+# Real-Life Example
+
+## Authentication
+
+```text
+Are you Durgesh?
+```
+
+---
+
+## Authorization
+
+```text
+Can Durgesh access the admin panel?
+```
+
+---
+
+# Authorization in Django
+
+Django provides:
+
+- Permissions
+- Groups
+- Staff users
+- Superusers
+
+---
+
+# Protect Page Using login_required
+
+```python
+from django.contrib.auth.decorators import login_required
+
+@login_required(login_url='login')
+def dashboard(request):
+    return render(request, 'dashboard.html')
+```
+
+---
+
+# How login_required Works
+
+If user:
+
+- Logged in → Access Granted
+- Not logged in → Redirect to login page
+
+---
+
+# Staff User Authorization
+
+```python
+if request.user.is_staff:
+    print("Staff User")
+```
+
+---
+
+# Superuser Authorization
+
+```python
+if request.user.is_superuser:
+    print("Admin User")
+```
+
+---
+
+# Django Permissions
+
+Django automatically creates permissions like:
+
+```text
+add_user
+change_user
+delete_user
+view_user
+```
+
+---
+
+# Check User Permission
+
+```python
+if request.user.has_perm('app.add_student'):
+    print("Permission Granted")
+```
+
+---
+
+# Group-Based Authorization
+
+Example groups:
+
+- Admin
+- Teacher
+- Student
+
+Permissions can be assigned to groups.
+
+---
+
+# Example
+
+## Teacher Can
+
+- Add marks
+- Update attendance
+
+## Teacher Cannot
+
+- Delete users
+
+---
+
+# Authentication vs Authorization
+
+| Feature | Authentication | Authorization |
+|----------|---------------|---------------|
+| Purpose | Verify Identity | Check Permissions |
+| Question | Who are you? | What can you do? |
+| Happens First | Yes | After Authentication |
+| Uses Password | Yes | Usually No |
+| Main Goal | User Verification | Access Control |
+
+---
+
+# Complete Example
+
+Suppose a user opens the admin panel.
+
+---
+
+## Step 1: Authentication
+
+User enters:
+
+```text
+Username = Durgesh
+Password = 123
+```
+
+Django verifies the credentials.
+
+If correct:
+
+```text
+User Authenticated
+```
+
+---
+
+## Step 2: Authorization
+
+Now Django checks:
+
+```text
+Is user admin?
+```
+
+If yes:
+
+```text
+Access Granted
+```
+
+Else:
+
+```text
+Access Denied
+```
+
+---
+
+# Authentication Without Authorization
+
+Example:
+
+- User can login
+- But cannot access admin panel
+
+---
+
+# Authorization Without Authentication
+
+Usually not possible because:
+
+The system first needs to know:
+
+```text
+Who are you?
+```
+
+Then it checks permissions.
+
+---
+
+# Django Authentication Tables
+
+When using Django authentication, Django creates tables like:
+
+| Table | Purpose |
+|--------|----------|
+| auth_user | Store users |
+| auth_group | Store groups |
+| auth_permission | Store permissions |
+
+---
+
+# Create Superuser in Django
+
+Command:
+
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+# Django Admin Panel
+
+Admin URL:
+
+```text
+/admin
+```
+
+Only authorized admin users can access it.
+
+---
+
+# Important Concepts
+
+## Authentication = Identity Verification
+
+```text
+Who are you?
+```
+
+---
+
+## Authorization = Permission Checking
+
+```text
+What are you allowed to do?
+```
+
+---
+
+# Simple Flow Diagram
+
+```text
+Authentication
+      ↓
+Verify User
+      ↓
+Authorization
+      ↓
+Check Permissions
+      ↓
+Grant or Deny Access
+```
+
+---
+
+# Final Summary
+
+## Authentication
+
+- Verifies user identity
+- Used in login systems
+- Uses username and password
+- Examples:
+  - Login
+  - OTP
+  - Google Sign-In
+
+---
+
+## Authorization
+
+- Checks permissions
+- Controls user access
+- Examples:
+  - Admin access
+  - Edit/Delete permissions
+  - Dashboard access
+
+---
+
+# One-Line Difference
+
+## Authentication
+
+```text
+Who are you?
+```
+
+## Authorization
+
+```text
+What are you allowed to do?
+```
+
+---
+
+
+
