@@ -2016,3 +2016,701 @@ What are you allowed to do?
 
 
 
+
+# Django Template Tags Complete Guide
+
+Django template tags are used to add logic inside HTML templates.
+
+---
+
+# Syntax
+
+## Variables
+
+```html
+{{ variable }}
+```
+
+---
+
+## Template Tags
+
+```html
+{% tag %}
+```
+
+---
+
+## Filters
+
+```html
+{{ value|filter }}
+```
+
+---
+
+# 1. for Tag
+
+Used for loops.
+
+```html
+{% for student in students %}
+
+    <h1>{{ student.name }}</h1>
+
+{% endfor %}
+```
+
+---
+
+# 2. empty Tag
+
+Used when loop data is empty.
+
+```html
+{% for student in students %}
+
+    {{ student.name }}
+
+{% empty %}
+
+    No Students Found
+
+{% endfor %}
+```
+
+---
+
+# 3. if Tag
+
+Used for conditions.
+
+```html
+{% if age >= 18 %}
+
+    Adult
+
+{% endif %}
+```
+
+---
+
+# 4. if else Tag
+
+```html
+{% if user.is_authenticated %}
+
+    Welcome User
+
+{% else %}
+
+    Please Login
+
+{% endif %}
+```
+
+---
+
+# 5. if elif else Tag
+
+```html
+{% if marks >= 90 %}
+
+    A Grade
+
+{% elif marks >= 60 %}
+
+    B Grade
+
+{% else %}
+
+    Fail
+
+{% endif %}
+```
+
+---
+
+# 6. comment Tag
+
+```html
+{% comment %}
+
+This is comment
+
+{% endcomment %}
+```
+
+---
+
+# 7. extends Tag
+
+Used for template inheritance.
+
+```html
+{% extends 'base.html' %}
+```
+
+---
+
+# 8. block Tag
+
+```html
+{% block content %}
+
+{% endblock %}
+```
+
+---
+
+# 9. include Tag
+
+```html
+{% include 'navbar.html' %}
+```
+
+---
+
+# 10. csrf_token
+
+Used for form security.
+
+```html
+<form method="POST">
+
+    {% csrf_token %}
+
+</form>
+```
+
+---
+
+# 11. url Tag
+
+## urls.py
+
+```python
+path('about/', views.about, name='about')
+```
+
+## HTML
+
+```html
+<a href="{% url 'about' %}">About</a>
+```
+
+---
+
+# 12. load static
+
+```html
+{% load static %}
+```
+
+---
+
+# CSS Example
+
+```html
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+```
+
+---
+
+# 13. with Tag
+
+```html
+{% with total=100 %}
+
+    {{ total }}
+
+{% endwith %}
+```
+
+---
+
+# 14. cycle Tag
+
+```html
+{% for item in items %}
+
+<tr class="{% cycle 'red' 'blue' %}">
+
+{% endfor %}
+```
+
+---
+
+# 15. now Tag
+
+```html
+{% now "d-m-Y" %}
+```
+
+---
+
+# Output
+
+```text
+08-05-2026
+```
+
+---
+
+# 16. firstof Tag
+
+```html
+{% firstof var1 var2 var3 %}
+```
+
+---
+
+# 17. autoescape Tag
+
+```html
+{% autoescape off %}
+
+{{ html_content }}
+
+{% endautoescape %}
+```
+
+---
+
+# 18. filter Tag
+
+```html
+{% filter upper %}
+
+hello world
+
+{% endfilter %}
+```
+
+---
+
+# Output
+
+```text
+HELLO WORLD
+```
+
+---
+
+# 19. spaceless Tag
+
+```html
+{% spaceless %}
+
+<p>Hello</p>
+
+{% endspaceless %}
+```
+
+---
+
+# 20. verbatim Tag
+
+```html
+{% verbatim %}
+
+{{ name }}
+
+{% endverbatim %}
+```
+
+---
+
+# 21. lorem Tag
+
+```html
+{% lorem 5 w %}
+```
+
+---
+
+# 22. regroup Tag
+
+```html
+{% regroup students by course as course_list %}
+```
+
+---
+
+# 23. widthratio Tag
+
+```html
+{% widthratio 5 10 100 %}
+```
+
+---
+
+# Output
+
+```text
+50
+```
+
+---
+
+# 24. templatetag
+
+```html
+{% templatetag openblock %}
+```
+
+---
+
+# Output
+
+```text
+{%
+```
+
+---
+
+# 25. static Tag
+
+```html
+{% static 'images/logo.png' %}
+```
+
+---
+
+# 26. url with Variable
+
+```html
+<a href="{% url 'details' student.id %}">
+```
+
+---
+
+# 27. forloop.counter
+
+```html
+{% for student in students %}
+
+    {{ forloop.counter }}
+
+{% endfor %}
+```
+
+---
+
+# forloop Variables
+
+| Variable | Meaning |
+|---|---|
+| forloop.counter | Start from 1 |
+| forloop.counter0 | Start from 0 |
+| forloop.first | First iteration |
+| forloop.last | Last iteration |
+
+---
+
+# Condition Inside Loop
+
+## Example 1
+
+```html
+{% for student in students %}
+
+    {% if student.age >= 18 %}
+
+        <h1>{{ student.name }}</h1>
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Example 2
+
+```html
+{% for student in students %}
+
+    {% if student.marks >= 40 %}
+
+        <p>{{ student.name }} Pass</p>
+
+    {% else %}
+
+        <p>{{ student.name }} Fail</p>
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Example 3
+
+```html
+{% for student in students %}
+
+    {% if student.marks >= 90 %}
+
+        A Grade
+
+    {% elif student.marks >= 60 %}
+
+        B Grade
+
+    {% else %}
+
+        Fail
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Example 4
+
+```html
+{% for student in students %}
+
+    {% if forloop.first %}
+
+        <h1>First Student</h1>
+
+    {% endif %}
+
+    {{ student.name }}
+
+{% endfor %}
+```
+
+---
+
+# Example 5
+
+```html
+{% for student in students %}
+
+    {{ student.name }}
+
+    {% if forloop.last %}
+
+        <p>Last Student</p>
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Example 6
+
+```html
+{% for student in students %}
+
+    {% if forloop.counter|divisibleby:2 %}
+
+        Even Row
+
+    {% else %}
+
+        Odd Row
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Important Django Filters
+
+| Filter | Example |
+|---|---|
+| upper | `{{ name|upper }}` |
+| lower | `{{ name|lower }}` |
+| title | `{{ name|title }}` |
+| length | `{{ students|length }}` |
+| date | `{{ dob|date:"d-m-Y" }}` |
+| safe | `{{ html|safe }}` |
+| truncatechars | `{{ text|truncatechars:20 }}` |
+| default | `{{ name|default:"Guest" }}` |
+
+---
+
+# Filter Examples
+
+## upper
+
+```html
+{{ name|upper }}
+```
+
+---
+
+## lower
+
+```html
+{{ name|lower }}
+```
+
+---
+
+## title
+
+```html
+{{ name|title }}
+```
+
+---
+
+## length
+
+```html
+{{ students|length }}
+```
+
+---
+
+## date
+
+```html
+{{ date|date:"d-m-Y" }}
+```
+
+---
+
+# Complete Example
+
+## views.py
+
+```python
+from django.shortcuts import render
+
+def home(request):
+
+    students = [
+
+        {'name': 'Durgesh', 'marks': 90},
+        {'name': 'Rahul', 'marks': 30},
+        {'name': 'Amit', 'marks': 70},
+
+    ]
+
+    return render(request, 'home.html', {
+        'students': students
+    })
+```
+
+---
+
+## home.html
+
+```html
+{% for student in students %}
+
+    <h2>{{ student.name }}</h2>
+
+    {% if student.marks >= 40 %}
+
+        <p>Pass</p>
+
+    {% else %}
+
+        <p>Fail</p>
+
+    {% endif %}
+
+{% endfor %}
+```
+
+---
+
+# Template Inheritance Example
+
+## base.html
+
+```html
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+{% include 'navbar.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>
+```
+
+---
+
+## home.html
+
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Home Page</h1>
+
+{% endblock %}
+```
+
+---
+
+# Final Summary
+
+## Variables
+
+```html
+{{ variable }}
+```
+
+---
+
+## Template Tags
+
+```html
+{% tag %}
+```
+
+---
+
+## Filters
+
+```html
+{{ value|filter }}
+```
+
+---
+
+# Most Important Tags for Beginners
+
+1. for
+2. if
+3. extends
+4. block
+5. include
+6. csrf_token
+7. url
+8. load static
+9. empty
+10. with
+
+
+
