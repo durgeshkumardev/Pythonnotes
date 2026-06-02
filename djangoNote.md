@@ -2713,4 +2713,1203 @@ def home(request):
 10. with
 
 
+---
+
+# Django Filtering and Middleware Guide
+
+## Introduction
+
+Django provides a powerful ORM (Object Relational Mapper) that allows developers to query and filter data without writing SQL queries directly.
+
+Middleware is another important Django concept that allows developers to process requests and responses globally before they reach the view or before they are returned to the client.
+
+This document explains both concepts with practical examples.
+
+---
+
+# Part 1: Django Filtering
+
+## What is Filtering?
+
+Filtering is the process of retrieving specific records from the database based on one or more conditions.
+
+For example:
+
+* Get all mobile products
+* Get products above ₹50,000
+* Search products by name
+* Find active users
+
+---
+
+## Sample Product Model
+
+```python
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    stock = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+```
+
+---
+
+## Retrieve All Records
+
+```python
+Product.objects.all()
+```
+
+SQL Equivalent:
+
+```sql
+SELECT * FROM product;
+```
+
+---
+
+## Exact Match Filtering
+
+```python
+Product.objects.filter(category="Mobile")
+```
+
+SQL Equivalent:
+
+```sql
+SELECT * FROM product
+WHERE category = 'Mobile';
+```
+
+---
+
+## Understanding Double Underscore (__)
+
+Django uses double underscore syntax.
+
+Format:
+
+```python
+field_name__lookup=value
+```
+
+Example:
+
+```python
+name__icontains="samsung"
+price__gt=50000
+```
+
+Where:
+
+* name = field name
+* icontains = lookup type
+
+---
+
+## contains vs icontains
+
+### contains
+
+```python
+Product.objects.filter(name__contains="Samsung")
+```
+
+Case-sensitive search.
+
+### icontains
+
+```python
+Product.objects.filter(name__icontains="samsung")
+```
+
+Case-insensitive search.
+
+Matches:
+
+* Samsung
+* samsung
+* SAMSUNG
+
+---
+
+## Common Lookups
+
+### Exact Match
+
+```python
+Product.objects.filter(category="Mobile")
+```
+
+### Contains
+
+```python
+Product.objects.filter(name__icontains="phone")
+```
+
+### Starts With
+
+```python
+Product.objects.filter(name__startswith="Sam")
+```
+
+### Ends With
+
+```python
+Product.objects.filter(name__endswith="Book")
+```
+
+### Greater Than
+
+```python
+Product.objects.filter(price__gt=50000)
+```
+
+### Less Than
+
+```python
+Product.objects.filter(price__lt=1000)
+```
+
+### Greater Than or Equal
+
+```python
+Product.objects.filter(price__gte=50000)
+```
+
+### Less Than or Equal
+
+```python
+Product.objects.filter(price__lte=50000)
+```
+
+---
+
+## Multiple Conditions
+
+```python
+Product.objects.filter(
+    category="Mobile",
+    price__gt=50000
+)
+```
+
+SQL Equivalent:
+
+```sql
+SELECT *
+FROM product
+WHERE category='Mobile'
+AND price > 50000;
+```
+
+---
+
+## Using Q Objects
+
+Import:
+
+```python
+from django.db.models import Q
+```
+
+### OR Condition
+
+```python
+Product.objects.filter(
+    Q(category="Mobile") |
+    Q(category="Laptop")
+)
+```
+
+SQL Equivalent:
+
+```sql
+WHERE category='Mobile'
+OR category='Laptop';
+```
+
+### AND Condition
+
+```python
+Product.objects.filter(
+    Q(category="Mobile") &
+    Q(price__gt=50000)
+)
+```
+
+---
+
+## Dynamic Filtering
+
+```python
+products = Product.objects.all()
+
+search = request.GET.get("search")
+category = request.GET.get("category")
+
+if search:
+    products = products.filter(
+        name__icontains=search
+    )
+
+if category:
+    products = products.filter(
+        category__icontains=category
+    )
+```
+
+---
+
+## Professional Dynamic Filter
+
+```python
+filters = {}
+
+if request.GET.get("category"):
+    filters["category__icontains"] = request.GET.get("category")
+
+products = Product.objects.filter(**filters)
+```
+
+---
+
+# Part 2: Django Middleware
+
+## What is Middleware?
+
+Middleware is a layer between the request and response cycle.
+
+Every request passes through middleware before reaching the view.
+
+Every response passes through middleware before returning to the client.
+
+Request Flow:
+
+User → Middleware → View
+
+Response Flow:
+
+View → Middleware → User
+
+---
+
+## Why Middleware is Used
+
+Middleware is used for:
+
+* Authentication
+* Authorization
+* Logging
+* Session Management
+* Security
+* Request Validation
+* Response Modification
+* Maintenance Mode
+* Activity Tracking
+
+---
+
+## Built-in Middleware
+
+Located in settings.py
+
+```python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+```
+
+---
+
+## AuthenticationMiddleware
+
+Provides:
+
+```python
+request.user
+```
+
+Example:
+
+```python
+if request.user.is_authenticated:
+    print("Logged In")
+```
+
+---
+
+## SessionMiddleware
+
+Provides:
+
+```python
+request.session
+```
+
+Store data:
+
+```python
+request.session["username"] = "Durgesh"
+```
+
+Retrieve data:
+
+```python
+request.session["username"]
+```
+
+---
+
+## CsrfViewMiddleware
+
+Protects forms from CSRF attacks.
+
+Form Example:
+
+```html
+<form method="POST">
+    {% csrf_token %}
+</form>
+```
+
+Without CSRF token:
+
+```text
+403 Forbidden
+```
+
+---
+
+## Creating Custom Middleware
+
+Create:
+
+middleware.py
+
+```python
+class RequestLoggerMiddleware:
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+
+        print("Request Started")
+
+        response = self.get_response(request)
+
+        print("Response Returned")
+
+        return response
+```
+
+---
+
+## Register Middleware
+
+settings.py
+
+```python
+MIDDLEWARE = [
+    ...
+    'searching.middleware.RequestLoggerMiddleware',
+]
+```
+
+---
+
+## Login Check Middleware
+
+```python
+from django.shortcuts import redirect
+
+class LoginRequiredMiddleware:
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+
+        if not request.user.is_authenticated:
+            return redirect("login")
+
+        return self.get_response(request)
+```
+
+---
+
+## Maintenance Mode Middleware
+
+```python
+from django.http import HttpResponse
+
+class MaintenanceMiddleware:
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+
+        maintenance = True
+
+        if maintenance:
+            return HttpResponse(
+                "Website Under Maintenance"
+            )
+
+        return self.get_response(request)
+```
+
+---
+
+## Logging Middleware
+
+```python
+class LogMiddleware:
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+
+        print(
+            request.method,
+            request.path
+        )
+
+        return self.get_response(request)
+```
+
+Example Output:
+
+```text
+GET /products/
+POST /login/
+GET /cart/
+```
+
+---
+
+## Middleware vs Decorator
+
+Middleware:
+
+* Runs for every request
+* Global functionality
+
+Decorator:
+
+```python
+@login_required
+def dashboard(request):
+    pass
+```
+
+* Runs only on selected views
+* View-specific functionality
+
+---
+
+# Interview Questions
+
+### What is Django Middleware?
+
+Middleware is a framework of hooks into Django's request/response processing. It processes requests before they reach the view and responses before they are sent to the client.
+
+### What is Filtering in Django?
+
+Filtering is the process of retrieving records from the database that satisfy specific conditions using Django ORM.
+
+### What is __icontains?
+
+Case-insensitive text search lookup.
+
+Example:
+
+```python
+Product.objects.filter(
+    name__icontains="samsung"
+)
+```
+
+### What is the difference between filter() and get()?
+
+filter():
+
+```python
+Product.objects.filter(category="Mobile")
+```
+
+Returns QuerySet.
+
+get():
+
+```python
+Product.objects.get(id=1)
+```
+
+Returns a single object.
+
+Raises exception if no record exists or multiple records exist.
+
+---
+
+# Conclusion
+
+Filtering and Middleware are two of the most important concepts in Django.
+
+Filtering allows efficient querying of data using Django ORM.
+
+Middleware allows global processing of requests and responses for security, authentication, logging, tracking, and many other cross-cutting concerns.
+
+
+---
+# Part 3: Django Templates (Django Template Language - DTL)
+
+## Introduction
+
+Django Templates are used to display dynamic data inside HTML pages.
+
+The Django Template Language (DTL) is similar to Jinja2 and allows developers to:
+
+* Display variables
+* Create loops
+* Apply conditions
+* Format data
+* Reuse layouts
+* Build dynamic web pages
+
+Templates separate the presentation layer (HTML) from the business logic (Python).
+
+---
+
+# Template Rendering Flow
+
+```text
+Browser Request
+       ↓
+View Function
+       ↓
+Context Data
+       ↓
+Template Engine
+       ↓
+Rendered HTML
+       ↓
+Browser Response
+```
+
+Example:
+
+View:
+
+```python
+def home(request):
+
+    context = {
+        "name": "Durgesh"
+    }
+
+    return render(
+        request,
+        "home.html",
+        context
+    )
+```
+
+Template:
+
+```html
+<h1>Hello {{ name }}</h1>
+```
+
+Output:
+
+```html
+<h1>Hello Durgesh</h1>
+```
+
+---
+
+# Template Syntax
+
+Django templates use three major syntaxes.
+
+## 1. Variables
+
+Syntax:
+
+```html
+{{ variable }}
+```
+
+Example:
+
+```html
+<h1>{{ name }}</h1>
+```
+
+Output:
+
+```html
+<h1>Durgesh</h1>
+```
+
+---
+
+## Accessing Object Properties
+
+Model:
+
+```python
+product = Product.objects.first()
+```
+
+Template:
+
+```html
+{{ product.name }}
+{{ product.price }}
+{{ product.category }}
+```
+
+Output:
+
+```html
+Samsung Galaxy
+75000
+Mobile
+```
+
+---
+
+# 2. Template Tags
+
+Syntax:
+
+```html
+{% tag %}
+```
+
+Used for:
+
+* Conditions
+* Loops
+* Includes
+* URL generation
+* Template inheritance
+
+---
+
+# If Condition
+
+```html
+{% if product.stock > 0 %}
+    In Stock
+{% endif %}
+```
+
+Output:
+
+```html
+In Stock
+```
+
+---
+
+# If Else Condition
+
+```html
+{% if product.stock > 0 %}
+    In Stock
+{% else %}
+    Out Of Stock
+{% endif %}
+```
+
+---
+
+# Multiple Conditions
+
+```html
+{% if price > 50000 %}
+    Expensive Product
+{% elif price > 20000 %}
+    Medium Range Product
+{% else %}
+    Budget Product
+{% endif %}
+```
+
+---
+
+# For Loop
+
+```html
+{% for product in products %}
+    <h3>{{ product.name }}</h3>
+{% endfor %}
+```
+
+Output:
+
+```html
+Samsung Galaxy
+iPhone 16
+HP Laptop
+```
+
+---
+
+# Empty Block
+
+```html
+{% for product in products %}
+    {{ product.name }}
+{% empty %}
+    No Products Found
+{% endfor %}
+```
+
+Useful when queryset is empty.
+
+---
+
+# Loop Variables
+
+```html
+{% for product in products %}
+    {{ forloop.counter }}
+    {{ product.name }}
+{% endfor %}
+```
+
+Output:
+
+```html
+1 Samsung Galaxy
+2 iPhone 16
+3 HP Laptop
+```
+
+---
+
+# Common Forloop Variables
+
+| Variable         | Description     |
+| ---------------- | --------------- |
+| forloop.counter  | 1,2,3,4         |
+| forloop.counter0 | 0,1,2,3         |
+| forloop.first    | First iteration |
+| forloop.last     | Last iteration  |
+
+---
+
+# 3. Template Filters
+
+Filters modify displayed values.
+
+Syntax:
+
+```html
+{{ variable|filter }}
+```
+
+---
+
+# Upper Filter
+
+```html
+{{ name|upper }}
+```
+
+Output:
+
+```html
+DURGESH
+```
+
+---
+
+# Lower Filter
+
+```html
+{{ name|lower }}
+```
+
+Output:
+
+```html
+durgesh
+```
+
+---
+
+# Length Filter
+
+```html
+{{ products|length }}
+```
+
+Output:
+
+```html
+8
+```
+
+---
+
+# Default Filter
+
+```html
+{{ username|default:"Guest" }}
+```
+
+Output:
+
+```html
+Guest
+```
+
+---
+
+# Title Filter
+
+```html
+{{ name|title }}
+```
+
+Output:
+
+```html
+Durgesh Kumar
+```
+
+---
+
+# Truncate Filter
+
+```html
+{{ description|truncatechars:20 }}
+```
+
+Output:
+
+```html
+This is a long des...
+```
+
+---
+
+# Date Filter
+
+```html
+{{ created_at|date:"d-m-Y" }}
+```
+
+Output:
+
+```html
+02-06-2026
+```
+
+---
+
+# Time Filter
+
+```html
+{{ created_at|time:"H:i" }}
+```
+
+Output:
+
+```html
+14:30
+```
+
+---
+
+# Comments
+
+Single Line Comment:
+
+```html
+{# This is comment #}
+```
+
+Block Comment:
+
+```html
+{% comment %}
+This section is hidden
+{% endcomment %}
+```
+
+---
+
+# URL Tag
+
+Hardcoded URL:
+
+```html
+<a href="/products/">
+    Products
+</a>
+```
+
+Recommended:
+
+```html
+<a href="{% url 'products' %}">
+    Products
+</a>
+```
+
+Benefits:
+
+* Easier maintenance
+* URL changes automatically reflected
+
+---
+
+# CSRF Token
+
+Every POST form should include:
+
+```html
+<form method="POST">
+
+    {% csrf_token %}
+
+    <input type="text">
+
+</form>
+```
+
+Without CSRF token:
+
+```text
+403 Forbidden
+```
+
+---
+
+# Template Inheritance
+
+One of the most important Django concepts.
+
+---
+
+## base.html
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+{% block title %}
+{% endblock %}
+</title>
+
+</head>
+
+<body>
+
+{% block content %}
+{% endblock %}
+
+</body>
+
+</html>
+```
+
+---
+
+## home.html
+
+```html
+{% extends "base.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+<h1>Welcome To Django</h1>
+{% endblock %}
+```
+
+Output:
+
+```html
+<html>
+
+<head>
+<title>Home Page</title>
+</head>
+
+<body>
+<h1>Welcome To Django</h1>
+</body>
+
+</html>
+```
+
+Benefits:
+
+* Reusable layouts
+* Less duplicate code
+* Easier maintenance
+
+---
+
+# Include Templates
+
+Reusable components.
+
+---
+
+## navbar.html
+
+```html
+<nav>
+
+<a href="/">Home</a>
+<a href="/products/">Products</a>
+<a href="/contact/">Contact</a>
+
+</nav>
+```
+
+---
+
+## home.html
+
+```html
+{% include "navbar.html" %}
+```
+
+Output:
+
+Navbar inserted automatically.
+
+---
+
+# Static Files
+
+Load static files:
+
+```html
+{% load static %}
+```
+
+CSS:
+
+```html
+<link
+rel="stylesheet"
+href="{% static 'css/style.css' %}">
+```
+
+Image:
+
+```html
+<img
+src="{% static 'images/logo.png' %}">
+```
+
+---
+
+# Common Interview Questions
+
+## What is Django Template Language?
+
+Django Template Language (DTL) is a template system used to create dynamic HTML pages using variables, tags, and filters.
+
+---
+
+## Difference Between {{ }} and {% %}
+
+### {{ }}
+
+Displays data.
+
+Example:
+
+```html
+{{ name }}
+```
+
+### {% %}
+
+Performs logic.
+
+Example:
+
+```html
+{% if user %}
+{% endif %}
+```
+
+---
+
+## What is Template Inheritance?
+
+Template inheritance allows multiple pages to share a common layout using:
+
+```html
+{% extends %}
+{% block %}
+```
+
+---
+
+## What is Include Tag?
+
+Used to insert reusable templates such as:
+
+* Navbar
+* Sidebar
+* Footer
+
+Example:
+
+```html
+{% include "navbar.html" %}
+```
+
+---
+
+# Summary
+
+Django Templates provide:
+
+* Variables
+* Conditions
+* Loops
+* Filters
+* Template Inheritance
+* Includes
+* URL Generation
+* Static Files
+* Form Security
+
+These concepts are used in almost every Django project and are essential for becoming a Django developer.
+
+
+
 
